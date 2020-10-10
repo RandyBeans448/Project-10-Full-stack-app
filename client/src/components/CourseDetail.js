@@ -4,22 +4,32 @@ const ReactMarkdown = require('react-markdown')
 
 export class CourseDetail extends Component {
 
-        constructor() {
-            super();
-        
+        constructor(props) {
+            super(props);
+            // this.handleChange = this.handleChange.bind(this)
+            this.state = {
+                authenticatedUser: this.state,
+                courses: [],
+                errors: this.state,
+                updateCourse: []
+              }
         }
         
-        state = {
-            authenticatedUser: this.state,
-            courses: [],
-            errors: this.state,
-          }
+
 
 
       componentDidMount() {
         this.props.context.actions.usersCourses();
       }
 
+    //   componentWillUnmount() {
+    //     this.changeCourseState()
+    //   }
+
+    // handleChange() {
+    //     this.setState({updateCourse: displayCourses});
+    //   }
+    
 
 
     render () {
@@ -32,8 +42,6 @@ export class CourseDetail extends Component {
         let updateAndDeleteBtns;
         let returnBtn;
         const { context } = this.props
-
-
 
         if(this.props.context.courses !== null) {
             this.props.context.courses.courses.forEach(element => {
@@ -55,7 +63,7 @@ export class CourseDetail extends Component {
                 updateAndDeleteBtns = 
                     <React.Fragment>
                         <div >
-                            <NavLink onClick= {changeCourseState} to={`/updateCourse/${paramsId}`}  className="linksColumns"> Update </NavLink>
+                            <NavLink onClick={this.handleChange} to={`/updateCourse/${paramsId}`}  className="linksColumns"> Update </NavLink>
                             <NavLink to="/updateCourse" className="linksColumns"> Delete </NavLink>
                             <NavLink to="/"className="linksColumns" > Return </NavLink>
                         </div> 
@@ -70,16 +78,18 @@ export class CourseDetail extends Component {
             }
         }
 
-        function changeCourseState() {
-            if (displayCourses !== null) {
-               console.log('change')
-               this.setState(() => {
-                   return {
-                     courses: displayCourses
-                   };
-                 });
-            }
-         }
+        // function changeCourseState() {
+        //     if (displayCourses !== null) {
+        //        console.log('change')
+        //        this.setState(() => {
+        //            return {
+        //             currentCourse: displayCourses
+        //            };
+        //          });
+        //     }
+        //  }
+
+
      
         return (
         <div className="grid">
