@@ -50,7 +50,7 @@ export default class Data {
 
       async updateCourse(course) {
         const response = await this.api('/courses/:id', 'PUT', course);
-        if (response.status === 201) {
+        if (response.status === 204) {
           return [];
         }
         else if (response.status === 400) {
@@ -92,5 +92,19 @@ export default class Data {
           throw new Error();
         }
       }
+
+      async getCoursesById(id) {
+        const response = await this.api(`/courses/${id}`, 'GET', null, false);
+        if (response.status === 200) {
+          return response.json().then(data => data);
+        }
+        else if (response.status === 401) {
+          return null;
+        }
+        else {
+          throw new Error();
+        }
+      }
+
     
 }
