@@ -52,8 +52,8 @@ export default () => (
             <Route path="/signout" component={UserSignOutWithContext} />
             <Route exact path="/" component={CoursesWithContext} />
             <Route path="/coursedetail/:id" component={CourseDetailsWithContext} />
-            <Route path="/createcourse" component={CreateCourseWithContext} />
-            <Route path="/updateCourse" component={UpdateCourseWithContext} />
+            <PrivateRoute path="/createcourse" component={CreateCourseWithContext} />
+            <PrivateRoute path="/updateCourse/:id" component={UpdateCourseWithContext} />
             <Route component={NotFound} />
           </Switch>
     </div>
