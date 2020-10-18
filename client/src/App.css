@@ -1,217 +1,208 @@
 body {
-  background-image: url(./Geo3.jpg);
-  text-align: center;
+  background-image: url(./Geo3.jpg); 
   background-size: 1500px 1500px;
   color: white;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-input {
-  margin: 5px;
-  border-color: rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  font-size: 13px;
-  color: white;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-  width: 50%;
-}
-
-
-
-ul {
-  text-align: center;
-  list-style-type: none;
-}
-
-.titleLink {
-  font-size: 1.75em;
-  letter-spacing: 7.5px;
-  color: white;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.navLinksDiv {
-  text-align: right;
-  padding: 15px;
-}
-
-.linksColumns {
-  color: white;
-  text-decoration: none;
-  margin: 5px;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 5px;
-}
-
-.linksColumns:hover {
-  background-color: mediumaquamarine;
-  color: black;
-}
-
-.linksLi {
-  margin: 30px;
-  color: white;
-  text-transform: uppercase;
-}
-
-.links {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 0.5em;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  width: 50%
-}
-
-.headerGrid {
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-}
-
-.headerDiv {
-  text-align: left;
-}
-
-.headerSignInOut {
-  text-align: right;
-}
-
-h1 {
-  text-transform: uppercase;
-  letter-spacing: 10px;
   
 }
 
 
-.signInDiv {
-  display:inline-block;
-  text-align: center;
-  width:50%;
-  padding:5px;
-  margin:5px;
-  border-color: #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-} 
-
-.signUpDiv {
-  display:inline-block;
-  text-align: center;
-  padding-top:10px;
-  padding-bottom:10px;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.signInBtn {
-  width: 55%;
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-  margin: 5px;
-  padding: 10px;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-
-}
-
-.signInBtn:hover {
-  background-color: mediumaquamarine;
-}
-
-.submitButton {
-  width: 27%;
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-  margin: 5px;
-  padding: 10px;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.cancelButton {
-  width: 27%;
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-  margin: 5px;
-  padding: 10px;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.submitButton:hover {
-  background-color: mediumaquamarine;
-}
-
-.cancelButton:hover {
-  background-color: red;
-}
 
 .grid {
-  display: table;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-  margin: 15px;
-}
+    display: table;
+    padding: 15px;
+    margin: 15px;
+  }
 
-.courseDisplayH1 {
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-size: 20px;
-}
-
-.detailDesc {
-  width: 75%;
-}
-
-.gridLeft {
-  display: table-cell;
-  text-align: left;
-  width: 75%;
-}
-
-.gridRight {
-  display: table-cell;
-  text-align: right;
-  width: 25%;
+  .gridLeft {
+    display: table-cell;
+    text-align: left;
+    min-width: 750px;
+    max-width: 750px;
+  }
   
-}
+  .gridRight {
+    text-align: left;
+    justify-content: left;
+    display: table-cell;
+    text-align: left;
+    min-width: 250px;
+    max-width: 250px;
+  }
 
+  /* Header start */
 
-.updateDiv {
-  display: grid;
-  grid-template-columns: auto auto ;
-  border: 1.5px solid #3F3F3F;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-  margin: 15px;
-}
+  .headerGrid {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+  }
+  
+  .headerDiv {
+    text-align: left;
+  }
+  
+  .headerSignInOut {
+    text-align: right;
+  }
 
-.updateDivLeft {
-  text-align: left;
-}
+  .titleLink {
+    font-size: 1.75em;
+    letter-spacing: 7.5px;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 
-.updateDivRight {
-  text-align: right;
+  /* Header end */
+
+  /* Links Start */
+
+  .linksColumns {
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+  }
+  
+  .linksColumns:hover {
+    background-color: mediumaquamarine;
+    color: black;
+  }
+  
+  .linksLi {
+    margin: 30px;
+    color: white;
+    text-transform: uppercase;
+  }
+  
+  .links {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.5em;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    width: 50%
+  }
+
+  /* Links end */
+
+  input {
+    margin: 5px;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-size: 13px;
+    color: white;
+    border: 1.5px solid #3F3F3F;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 50%;
+  }
+
+  .create-title-input {
+    margin: 5px;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-size: 13px;
+    color: white;
+    border: 1.5px solid #3F3F3F;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 465px
+  }
+
+  .create-time-input {
+    margin: 5px;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-size: 13px;
+    color: white;
+    border: 1.5px solid #3F3F3F;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 190px;
+    text-align: left;
+  }
+
+  .h4-create {
+    text-decoration: none;
+    text-align: left;
+    margin-left: 15px;
+    letter-spacing: 2.5px;
 }
 
 textarea {
-  width: 100%;
-  min-height: 300px;
-  background: #fff;
-  padding: 15px;
-  font-size: 16px;
-  margin: 0 0 20px;
-  border: 1px solid #ccc4d8;
-  color: #666;
-  line-height: 1.8;
-  outline: none;
-  box-sizing: border-box;
-}
+    min-width: 500px;
+    min-height: 360px;
+    background: #fff;
+    padding: 15px;
+    font-size: 16px;
+    margin: 0 0 20px;
+    border: 1.5px solid #3F3F3F;
+    color: white;
+    line-height: 1.8;
+    outline: none;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 
-.listToRight {
-  text-align: right;
+  .sideTextArea {
+    min-width: 150px;
+    min-height: 300px;
+    background: #fff;
+    padding: 15px;
+    font-size: 16px;
+    margin: 0 0 20px;
+    border: 1.5px solid #3F3F3F;
+    color: white;
+    line-height: 1.8;
+    outline: none;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .courses-list-div {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+  }
+
+  h1 {
+      text-align: center;
+      font-size: 1.75em;
+      letter-spacing: 7.5px;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+  }
+
+  .detailH1 {
+      text-align: left;
+  }
+
+  .detailDesc {
+      width: 75%;
+  }
+
+  h4 {
+      text-decoration: none;
+  }
+
+  
+
+  .list-right {
+      text-align: left;
+      justify-content: left;
+  }
+
+  .h1-left {
+    text-align: left;
+    justify-content: left;
+  }
+
+ul,
+ol {
+  text-align: center;
+  list-style-position: outside;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
