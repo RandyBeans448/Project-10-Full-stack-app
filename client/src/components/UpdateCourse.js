@@ -66,12 +66,12 @@ export class UpdateCourse extends Component {
         console.log(authedUser);
 
         return (
-            <div className="updateDiv">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="updateDivLeft">
-                        <div>
+            <div>
+                <form className="grid"  onSubmit={this.handleSubmit}>
+                    <div >
+                        <div  className="gridLeft" >
                           <h3>Course title</h3>
-                            <div >
+                            <div>
                                 <input id="title" name="title" type="text" onChange={this.handleChange} defaultValue={display.title}></input>
                             </div>
                                 <p>By {authedUser.firstName} {authedUser.lastName}</p>
@@ -82,8 +82,8 @@ export class UpdateCourse extends Component {
                                 </div>
                             </div>
                     </div>
-                    <div>
-                        <div className="updateDivRight">
+                    <div className="gridRight">
+                        <div >
                             <ul>
                                 <li>
                                 <h4>Estimated Time</h4>
@@ -101,7 +101,7 @@ export class UpdateCourse extends Component {
                         </div>
                     </div>
                     <div >
-                        <button onClick={this.handleSubmit}  className="button" type="submit">Update Course</button>
+                        <button className="button" type="submit">Update Course</button>
                         <button >Cancel</button>
                     </div>
                 </form>
