@@ -2,50 +2,83 @@ import React, { Component } from 'react';
 
 export class CreateCourse extends Component {
 
-    constructor() {
-        super();
-      }
+    constructor(props) {
+        super(props)
+        this.state = {
+            authenticatedUser: this.state,
+            errors: this.state,
+            newCourse: []
+          }
+
+          this.handleSubmit = this.handleSubmit.bind(this);
+          this.handleChange = this.handleChange.bind(this);
+          
+    }
+
+    handleChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+            this.setState({
+                newCourse: {
+                    [name]: value
+                }
+            });
+      };
+
+    handleSubmit = (event) => {
+        const newCourse = this.state.newCourse;
+        event.preventDefault();
+        
+        this.props.context.data.createCourse(newCourse).then((respsonse => {
+            if(respsonse.status(201)) {
+                console.log(respsonse);
+                console.log("console.log");
+            } else {
+                throw new Error
+            }
+        })).catch(error => {
+            console.log('Course was not created', error);
+        })
+      };
       
     render () {
+        const newCourse = this.state.newCourse;
+        console.log(newCourse)
         return (
-    <div>
-        <div>
-        <h1> Create course </h1>
-            <div>
-                <form>
-                <input id="title" name="title" type="text" placeholder="Course title" value=""></input>
-                <p>User Name</p>
-                    <div>
+        <div className="grid">
+            <h1 className="h1-left"> Create course </h1>
+                <form onSubmit={this.handleSubmit}> 
+                    <div >
+                        <div className="gridLeft">
+                            <input id="title" name="title" type="text" placeholder="Course title" defaultValue="" className="create-title-input"  onChange={this.handleChange}></input>
+                            <h4>Course description</h4>
+                            <textarea id="description" name="description" placeholder="Course description" onChange={this.handleChange}></textarea>
+                        </div>
+                        <div className="gridRight">
+                            <ul>
+                                <li>
+                                    <h4 className="h4-create">Estimated Time</h4>
+                                        <div>
+                                            <input id="estimatedTime" name="estimatedTime" type="text" placeholder="Hours" className="create-time-input" onChange={this.handleChange} ></input>
+                                        </div>
+                                </li>
+                                <li >
+                                    <h4 className="h4-create">Materials Needed</h4>
+                                        <div>
+                                            <textarea id="materialsNeeded" className="sideTextArea" name="materialsNeeded" placeholder="List materials" onChange={this.handleChange}></textarea>
+                                        </div>
+                                </li>
+                            </ul>
+                        </div>
+            
+                    </div>
                         <div>
-                        <textarea id="description" name="description" placeholder="Course description"></textarea>
+                            <button type="submit" className="linksColumns">Create Course</button>
+                            <button className="linksColumns">Cancel</button>
                         </div>
-                    </div>
-                        <div class="grid-25 grid-right">
-                            <div>
-                                <ul>
-                                    <li>
-                                    <h4>Estimated Time</h4>
-                                        <div>
-                                        <input id="estimatedTime" name="estimatedTime" type="text" placeholder="Hours" value=""></input>
-                                        </div>
-                                    </li>
-                                    <li class="course--stats--list--item">
-                                    <h4>Materials Needed</h4>
-                                        <div>
-                                        <textarea id="materialsNeeded" name="materialsNeeded" placeholder="List materials"></textarea>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    <div>
-                        <button type="submit">Create Course</button>
-                        <button>Cancel</button>
-                    </div>
-                </form>   
-            </div>
+                </form>
         </div>
-    </div>
         )
     }
 }
