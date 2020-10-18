@@ -6,14 +6,14 @@ export default class Header extends React.PureComponent {
       const { context } = this.props; 
       const authedUser = context.authenticatedUser;
         return (
-          <div className="headerGrid">
-            <div className="headerDiv">
-              <Link className="titleLink" to="/"> Student Courses </Link>
+          <div>
+            <div>
+              <Link to="/courses" className="titleLink"> Student Courses </Link>
               <nav>
                 {authedUser ? (
                   <React.Fragment>
-                      <div className="headerSignInOut">
-                      <span className="headerSpan"> Welcome  </span>
+                      <div>
+                      <span> Welcome  </span>
                         <Link  to="/signout"> Sign Out </Link>
                       </div>
                 </React.Fragment>                
@@ -32,4 +32,5 @@ export default class Header extends React.PureComponent {
         )
     }
 }
+
 
