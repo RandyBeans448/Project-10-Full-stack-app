@@ -15,7 +15,7 @@ Data API utility methods available throughout the app via Context */
 
     state = { 
       authenticatedUser: Cookies.getJSON('authenticatedUser') || null,
-      courses: null 
+      courses: null
     }
 
         render () {
@@ -24,6 +24,7 @@ Data API utility methods available throughout the app via Context */
         const value = {
           authenticatedUser,
           courses,
+
             data: this.data,
             actions: {
               signIn: this.signIn,
@@ -68,36 +69,19 @@ Data API utility methods available throughout the app via Context */
           }
 
         usersCourses = async () => {
-          const userCourses = await this.data.getCourses()
-           if (userCourses) {
-            this.setState(() => {
-              return {                                                                                                                                  
-                courses: userCourses
-              };
-            });
-           } 
-        }
-        
-        updateUsers = async (course) => {
-          const updateCourses = await this.data.updateCourse(course)
-            if (updateCourses){
+          const userCourses = await this.data.getCourses().then((response) => {
+            let receivedCourses = response;
+            if (receivedCourses) {
               this.setState(() => {
-                return {
-                  courses: updateCourses
+                return {                                                                                                                                  
+                  courses: receivedCourses
                 };
               });
-            }
-        }
-
-        updateUsers = async (course) => {
-          const updateCourses = await this.data.updateCourse(course)
-            if (updateCourses){
-              this.setState(() => {
-                return {
-                  courses: updateCourses
-                };
-              });
-            }
+             } 
+          }).catch(error => {
+            console.log('API request failed', error)
+            // react on errors.
+          })
         }
 
     };
@@ -116,4 +100,5 @@ export default function withContext(Component) {
       );
     }
   }
+
 
