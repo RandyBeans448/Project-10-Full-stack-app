@@ -48,8 +48,8 @@ export default class Data {
         }
       }
 
-      async updateCourse(course) {
-        const response = await this.api('/courses/:id', 'PUT', course);
+      async updateCourse(emailAddress, password, course) {
+        const response = await this.api('/courses/:id', 'PUT', course, true, { emailAddress, password } );
         if (response.status === 204) {
           return course;
         }
@@ -78,10 +78,10 @@ export default class Data {
         }
       }
 
-      async createCourse(course) {
-        const response = await this.api('/courses', 'POST', course);
+      async createCourse(emailAddress, password) {
+        const response = await this.api('/courses', 'POST', true, { emailAddress, password } );
         if (response.status === 201) {
-          return [course];
+          return [];
         }
         else if (response.status === 400) {
           return response.json().then(data => {
