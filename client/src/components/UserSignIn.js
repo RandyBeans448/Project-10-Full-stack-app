@@ -69,6 +69,7 @@ this submit function unpacks this.state into varibles.
 The function signIn is accessed through the context property
 which was passed from context.js.
 */
+
   submit = () => {
     console.log('Fire');
     const { context } = this.props;
