@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 const ReactMarkdown = require('react-markdown')
 
 export class UpdateCourse extends Component {
@@ -62,8 +63,10 @@ export class UpdateCourse extends Component {
 
         const display = this.state.courseDetails;
         console.log(display);
-        const authedUser = this.props.context.authenticatedUser;
-        console.log(authedUser);
+        const { context } = this.props; 
+        const authedUser = context.authenticatedUser;
+        const emailAddress = authedUser.emailAddress;
+        const password = authedUser.password;
 
         return (
             <div>
@@ -78,7 +81,7 @@ export class UpdateCourse extends Component {
                         </div>
                             <div>
                                 <div>
-                                   <textarea id="description" name="description" className="updateDivRight" onChange={this.handleChange} defaultValue={display.description}></textarea>
+                                   <textarea className="updateDivRight" id="description" name="description"  onChange={this.handleChange} defaultValue={display.description}></textarea>
                                 </div>
                             </div>
                     </div>
@@ -86,15 +89,15 @@ export class UpdateCourse extends Component {
                         <div >
                             <ul>
                                 <li>
-                                <h4>Estimated Time</h4>
+                                <h4 className="h4-update">Estimated Time</h4>
                                     <div>
-                                        <input id="estimatedTime" name="estimatedTime" type="text" onChange={this.handleChange} defaultValue={display.estimatedTime}></input>
+                                        <input className="update-right-input" id="estimatedTime" name="estimatedTime" type="text" onChange={this.handleChange} defaultValue={display.estimatedTime}></input>
                                     </div>
                                 </li>
                                 <li>
-                                <h4>Materials Needed</h4>
+                                <h4 className="h4-update">Materials Needed</h4>
                                     <div>
-                                        <textarea id="materialsNeeded" name="materialsNeeded" onChange={this.handleChange} defaultValue={display.materialsNeeded}></textarea>
+                                        <textarea className="sideTextArea-2" id="materialsNeeded" name="materialsNeeded" onChange={this.handleChange} defaultValue={display.materialsNeeded}></textarea>
                                     </div>
                                 </li>
                             </ul>
@@ -102,7 +105,7 @@ export class UpdateCourse extends Component {
                     </div>
                     <div >
                         <button className="button" type="submit">Update Course</button>
-                        <button >Cancel</button>
+                        <NavLink to="/" >Cancel</NavLink>
                     </div>
                 </form>
             </div>
