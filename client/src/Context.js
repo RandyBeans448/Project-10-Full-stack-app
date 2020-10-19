@@ -48,6 +48,9 @@ Data API utility methods available throughout the app via Context */
 
         signIn = async (emailAddress, password) => {
           const user = await this.data.getUser(emailAddress, password);
+          if (user) {
+            user.password = password;
+          }
           if (user !== null) {
             this.setState(() => {
               return {
