@@ -52,7 +52,7 @@ export class CourseDetail extends Component {
                 updateAndDeleteBtns = 
                     <React.Fragment>
                         <div >
-                            <NavLink to={`${parsedId}/update`}  className="linksColumns"> Update </NavLink>
+                            <NavLink to={`/courses/${paramsId}/update`}  className="linksColumns"> Update </NavLink>
                             <NavLink to="/updateCourse" className="linksColumns"> Delete </NavLink>
                             <NavLink to="/"className="linksColumns" > Return </NavLink>
                         </div> 
