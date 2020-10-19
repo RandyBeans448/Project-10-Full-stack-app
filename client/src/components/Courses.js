@@ -31,7 +31,7 @@ class Courses extends React.Component {
     if(this.props.context.courses !== null) {
         mappedCourses = this.props.context.courses.courses.map ((course) =>
        <li className="linksLi" key={course.id}>  
-        <Link className="links" to={`/${course.id}`}> {course.title} </Link>
+        <Link className="links" to={`/courses/${course.id}`}> {course.title} </Link>
       </li>
                       
     )
@@ -61,7 +61,7 @@ class Courses extends React.Component {
             </ul>
           </div>   
           <div>
-            <Link className="button" to="/create"> Create Course </Link>
+            <Link className="button" to="/courses/create"> Create Course </Link>
           </div>
         </div>
       </div>
