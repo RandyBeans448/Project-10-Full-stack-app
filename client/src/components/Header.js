@@ -8,7 +8,7 @@ export default class Header extends React.PureComponent {
         return (
           <div>
             <div>
-              <Link to="/courses" className="titleLink"> Student Courses </Link>
+              <Link to="/" className="titleLink"> Student Courses </Link>
               <nav>
                 {authedUser ? (
                   <React.Fragment>
@@ -32,5 +32,3 @@ export default class Header extends React.PureComponent {
         )
     }
 }
-
-
