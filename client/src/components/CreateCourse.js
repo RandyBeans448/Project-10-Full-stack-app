@@ -6,6 +6,8 @@ export class CreateCourse extends Component {
         super(props)
         this.state = {
             authenticatedUser: this.state,
+            emailAddress: '',
+            password: '',
             errors: this.state,
             newCourse: []
           }
@@ -13,6 +15,17 @@ export class CreateCourse extends Component {
           this.handleSubmit = this.handleSubmit.bind(this);
           this.handleChange = this.handleChange.bind(this);
           
+    }
+
+    componentDidMount() {
+        const { context } = this.props; 
+        const authedUser = context.authenticatedUser;
+        const emailAddress = authedUser.emailAddress;
+        const password = authedUser.password;
+        this.setState({
+            emailAddress: emailAddress,
+            password: password
+        })
     }
 
     handleChange = (event) => {
@@ -27,10 +40,12 @@ export class CreateCourse extends Component {
       };
 
     handleSubmit = (event) => {
-        const newCourse = this.state.newCourse;
+        // const newCourse = this.state.newCourse;
+
+        const { emailAddress, password } = this.state;
         event.preventDefault();
         
-        this.props.context.data.createCourse(newCourse).then((respsonse => {
+        this.props.context.data.createCourse(emailAddress, password).then((respsonse => {
             if(respsonse.status(201)) {
                 console.log(respsonse);
                 console.log("console.log");
@@ -44,7 +59,10 @@ export class CreateCourse extends Component {
       
     render () {
         const newCourse = this.state.newCourse;
-        console.log(newCourse)
+        console.log(newCourse);
+        console.log(this.state.emailAddress);
+        console.log(this.state.password);
+
         return (
         <div className="grid">
             <h1 className="h1-left"> Create course </h1>
