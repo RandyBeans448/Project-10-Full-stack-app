@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import Data from '../Data';
 
 export class CreateCourse extends Component {
 
     constructor(props) {
         super(props)
+        this.data = new Data();
         this.state = {
             authenticatedUser: this.state,
             emailAddress: '',
             password: '',
+            title: '',
+            description: '',
+            estimatedTime: '',
+            materialsNeeded: '',
             errors: this.state,
-            newCourse: []
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,10 +23,12 @@ export class CreateCourse extends Component {
     }
 
     componentDidMount() {
+
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
         const emailAddress = authedUser.emailAddress;
         const password = authedUser.password;
+
         this.setState({
             emailAddress: emailAddress,
             password: password
@@ -33,33 +40,51 @@ export class CreateCourse extends Component {
         const value = target.value;
         const name = target.name;
             this.setState({
-                newCourse: {
                     [name]: value
-                }
             });
+
+            console.log(name);
+            console.log(value);
       };
 
     handleSubmit = (event) => {
-        // const newCourse = this.state.newCourse;
+
+        const { context } = this.props;
+
+        const {
+               title,
+               description,
+               estimatedTime,
+               materialsNeeded 
+               } = this.state;
+
+        const newCourse = {
+              title,
+              description,
+              estimatedTime,
+              materialsNeeded 
+            };
 
         const { emailAddress, password } = this.state;
+
         event.preventDefault();
         
-        this.props.context.data.createCourse(emailAddress, password).then((respsonse => {
-            if(respsonse.status(201)) {
+        context.data.createCourse(newCourse, emailAddress, password).then((respsonse => {
+            if(respsonse.status === 201) {
                 console.log(respsonse);
                 console.log("console.log");
             } else {
                 throw new Error
             }
-        })).catch(error => {
-            console.log('Course was not created', error);
+        })).catch(errors => {
+            console.log('Course was not created', errors);
+            this.setState({ errors });
+            console.log(this.state.errors);
         })
       };
       
     render () {
-        const newCourse = this.state.newCourse;
-        console.log(newCourse);
+
         console.log(this.state.emailAddress);
         console.log(this.state.password);
 
