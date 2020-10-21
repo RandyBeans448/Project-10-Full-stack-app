@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-const ReactMarkdown = require('react-markdown')
+import Data from '../Data';
 
 export class UpdateCourse extends Component {
     constructor(props) {
         super(props)
+        this.data = new Data();
+
         this.state = {
             authenticatedUser: this.state,
-            courses: [],
+            emailAddress: '',
+            password: '',
+            title: '',
+            description: '',
+            estimatedTime: '',
+            materialsNeeded: '',
             errors: this.state,
             courseDetails: []
           }
@@ -21,6 +28,17 @@ export class UpdateCourse extends Component {
       componentDidMount() {
         const paramsId = this.props.match.params.id;
         const parsedId = parseInt(paramsId);
+
+        const { context } = this.props; 
+        const authedUser = context.authenticatedUser;
+        const emailAddress = authedUser.emailAddress;
+        const password = authedUser.password;
+
+        this.setState({
+            emailAddress: emailAddress,
+            password: password
+        });
+
         this.props.context.data.getCoursesById(parsedId).then((respsonse => {
             if(respsonse) {
                 console.log('True');
@@ -38,16 +56,31 @@ export class UpdateCourse extends Component {
         const value = target.value;
         const name = target.name;
             this.setState({
-                courseDetails: {
                     [name]: value
-                }
             });
       };
 
     handleSubmit = (event) => {
-        const course = this.state.courseDetails;
+
+     const {
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded 
+            } = this.state;
+
+     const updatedCourse = {
+           title,
+           description,
+           estimatedTime,
+           materialsNeeded 
+         };
+
+     const { emailAddress, password } = this.state;
+
         event.preventDefault();
-        this.props.context.data.updateCourse(course).then((respsonse => {
+
+        this.props.context.data.updateCourse(updatedCourse ,emailAddress, password).then((respsonse => {
             if(respsonse.status(201)) {
                 console.log(respsonse);
             } else {
@@ -65,9 +98,7 @@ export class UpdateCourse extends Component {
         console.log(display);
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
-        const emailAddress = authedUser.emailAddress;
-        const password = authedUser.password;
-
+    
         return (
             <div>
                 <form className="grid"  onSubmit={this.handleSubmit}>
