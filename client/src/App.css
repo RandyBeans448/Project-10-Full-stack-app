@@ -1,6 +1,6 @@
 body {
   background-color: red;
-  background: linear-gradient(-45deg, black,  grey, rgb(219, 218, 218), grey);
+  background: linear-gradient(-45deg, black,  rgb(83, 83, 83), rgb(219, 218, 218), rgb(83, 83, 83));
   background-size: 1500px 1500px;
   color: black;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
