@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import ParticlesContainer from './Particles';
 
 class Courses extends React.Component {
     state = {
@@ -15,14 +16,11 @@ class Courses extends React.Component {
       })
   }
 
-
-
   render() {
     const { context } = this.props; 
     const authedUser = context.authenticatedUser;
     let displayUser;
     let mappedCourses;
-    console.log(mappedCourses);
 
     if(authedUser) {
       displayUser = this.props.context.authenticatedUser
@@ -44,15 +42,10 @@ class Courses extends React.Component {
         </div>
     )
   } 
-
-
-
-    
     return (
-      <div >
-
-        <div className="courses-list-div">
-          <h1> Courses </h1>
+      <div id="tsparticles" className="tsparticles">
+        <div className="course-list-div">
+          <h1 className="course-list-h1"> Courses </h1>
           {/* <h1> Welcome {authedUser.firstName} {authedUser.lastName}</h1>
           <p>{authedUser.firstName} {authedUser.lastName}s courses</p> */}
           <div>
@@ -60,11 +53,15 @@ class Courses extends React.Component {
               <li>{mappedCourses}</li>
             </ul>
           </div>   
-          <div>
+          <div className="createButton">
+            <li>
             <Link className="button" to="/courses/create"> Create Course </Link>
+            </li>
           </div>
         </div>
+        <ParticlesContainer/>
       </div>
+      
     );
   }
 }
