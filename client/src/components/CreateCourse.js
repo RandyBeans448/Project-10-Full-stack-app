@@ -10,6 +10,7 @@ export class CreateCourse extends Component {
             authenticatedUser: this.state,
             emailAddress: '',
             password: '',
+            userId: '',
             title: '',
             description: '',
             estimatedTime: '',
@@ -28,10 +29,12 @@ export class CreateCourse extends Component {
         const authedUser = context.authenticatedUser;
         const emailAddress = authedUser.emailAddress;
         const password = authedUser.password;
+        const userId = authedUser.id;
 
         this.setState({
             emailAddress: emailAddress,
-            password: password
+            password: password,
+            userId: userId
         })
     }
 
@@ -52,13 +55,15 @@ export class CreateCourse extends Component {
         const { context } = this.props;
 
         const {
+               userId, 
                title,
                description,
                estimatedTime,
                materialsNeeded 
                } = this.state;
-
+              
         const newCourse = {
+              userId,
               title,
               description,
               estimatedTime,
@@ -72,7 +77,7 @@ export class CreateCourse extends Component {
         context.data.createCourse(newCourse, emailAddress, password).then((respsonse => {
             if(respsonse.status === 201) {
                 console.log(respsonse);
-                console.log("console.log");
+                this.props.history.push(`/courses/${newCourse.id}`);
             } else {
                 throw new Error
             }
@@ -84,9 +89,6 @@ export class CreateCourse extends Component {
       };
       
     render () {
-
-        console.log(this.state.emailAddress);
-        console.log(this.state.password);
 
         return (
         <div className="grid">
