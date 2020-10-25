@@ -1,208 +1,176 @@
 body {
-  background-image: url(./Geo3.jpg); 
+  background-color: red;
+  background: linear-gradient(-45deg, black,  grey, rgb(219, 218, 218), grey);
   background-size: 1500px 1500px;
-  color: white;
+  color: black;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   
 }
 
-
-
-.grid {
-    display: table;
-    padding: 15px;
-    margin: 15px;
-  }
-
-  .gridLeft {
-    display: table-cell;
-    text-align: left;
-    min-width: 750px;
-    max-width: 750px;
-  }
-  
-  .gridRight {
-    text-align: left;
-    justify-content: left;
-    display: table-cell;
-    text-align: left;
-    min-width: 250px;
-    max-width: 250px;
-  }
-
-  /* Header start */
-
-  .headerGrid {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-  }
-  
-  .headerDiv {
-    text-align: left;
-  }
-  
-  .headerSignInOut {
-    text-align: right;
-  }
-
-  .titleLink {
-    font-size: 1.75em;
-    letter-spacing: 7.5px;
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  /* Header end */
-
-  /* Links Start */
-
-  .linksColumns {
-    color: white;
-    text-decoration: none;
-    margin: 5px;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 5px;
-  }
-  
-  .linksColumns:hover {
-    background-color: mediumaquamarine;
-    color: black;
-  }
-  
-  .linksLi {
-    margin: 30px;
-    color: white;
-    text-transform: uppercase;
-  }
-  
-  .links {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 0.5em;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    width: 50%
-  }
-
-  /* Links end */
-
-  input {
-    margin: 5px;
-    border-color: rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    font-size: 13px;
-    color: white;
-    border: 1.5px solid #3F3F3F;
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 50%;
-  }
-
-  .create-title-input {
-    margin: 5px;
-    border-color: rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    font-size: 13px;
-    color: white;
-    border: 1.5px solid #3F3F3F;
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 465px
-  }
-
-  .create-time-input {
-    margin: 5px;
-    border-color: rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    font-size: 13px;
-    color: white;
-    border: 1.5px solid #3F3F3F;
-    background-color: rgba(0, 0, 0, 0.3);
-    width: 190px;
-    text-align: left;
-  }
-
-  .h4-create {
-    text-decoration: none;
-    text-align: left;
-    margin-left: 15px;
-    letter-spacing: 2.5px;
+#tsparticles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index:-999999999999999999999999999999999999999999999999999999999;
 }
 
-textarea {
-    min-width: 500px;
-    min-height: 360px;
-    background: #fff;
-    padding: 15px;
-    font-size: 16px;
-    margin: 0 0 20px;
-    border: 1.5px solid #3F3F3F;
-    color: white;
-    line-height: 1.8;
-    outline: none;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .sideTextArea {
-    min-width: 150px;
-    min-height: 300px;
-    background: #fff;
-    padding: 15px;
-    font-size: 16px;
-    margin: 0 0 20px;
-    border: 1.5px solid #3F3F3F;
-    color: white;
-    line-height: 1.8;
-    outline: none;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .courses-list-div {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    
-  }
-
-  h1 {
-      text-align: center;
-      font-size: 1.75em;
-      letter-spacing: 7.5px;
-      color: white;
-      text-decoration: none;
-      text-transform: uppercase;
-  }
-
-  .detailH1 {
-      text-align: left;
-  }
-
-  .detailDesc {
-      width: 75%;
-  }
-
-  h4 {
-      text-decoration: none;
-  }
-
-  
-
-  .list-right {
-      text-align: left;
-      justify-content: left;
-  }
-
-  .h1-left {
-    text-align: left;
-    justify-content: left;
-  }
-
-ul,
-ol {
-  text-align: center;
-  list-style-position: outside;
-  list-style-type: none;
+.header-div {
+  display: flex;
+  width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-decoration: none;
 }
+
+.header-div-left {
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  text-decoration: none;
+  margin-right: 850px;
+}
+
+.header-div-right {
+  display: flex;
+  justify-content: right;
+  text-align: right;
+  color: white;
+  text-decoration: none;
+}
+
+.header-div-right span {
+ margin-right: 30px;
+}
+
+.header-div-right a {
+  margin-right: 15px;
+ }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  margin:0 auto;
+ 
+}
+
+li {
+  padding: 2.5px;
+  width: 90%;
+  margin:0 auto;
+}
+
+li a {
+  color: white;
+  display: block;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: transform .2s;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color:#FF8C00;
+  transform: scale(1.1);
+}
+
+/* .header-div {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 10px;
+  align-items: stretch
+   /* background-color: rgba(0, 0, 0, 0.5); */
+/*  */
+
+/* .header-div-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch
+  /* background-color: rgba(0, 0, 0, 0.5); */
+
+
+/* .header-div-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: stretch
+  /* margin-right: 10px; */
+ 
+
+/* .titleLink {
+  font-size: 1.75em;
+  letter-spacing: 7.5px;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+   */
+.course-list-div {
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 10px;
+  padding-bottom: 60px;
+ 
+}
+
+.course-list-h1 {
+color: white;
+font-family: 'Open Sans Condensed', sans-serif;
+font-weight: 700;
+line-height: 64px;
+margin-top: 70px;
+/* padding: 20px 30px; */
+text-align: center;
+text-transform: uppercase; 
+letter-spacing: 5px;
+background-color: rgba(0, 0, 0, 0.5);
+margin-left: 9.5%;
+margin-right: 9.5%;
+}
+
+ .createButton {
+  list-style-type: none;
+  height: 50px;
+  line-height: 50px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  margin:0 auto;
+ 
+ }
+
+ .createButton a {
+  color: white;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-left: 150px;
+  padding-right: 150px;
+  text-transform: uppercase;
+ }
+
+.createButton a:after, .createButton a:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  z-index: -1;
+  margin:0 auto;
+  color: white;
+ 
+}
+
+.createButton a:hover {
+  background-color: mediumaquamarine;
+  transition: transform .2s;
+  transform: scale(1.1);
+}
+
