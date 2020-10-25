@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import ParticlesContainer from './Particles';
 const ReactMarkdown = require('react-markdown')
 
 export class CourseDetail extends Component {
@@ -8,16 +9,33 @@ export class CourseDetail extends Component {
             super(props);
             this.state = {
                 authenticatedUser: this.state,
+                emailAddress: '',
+                password: '',
                 courses: [],
                 errors: this.state,
                 courseDetails: []
               }
+
+              this.deleteCourse = this.deleteCourse.bind(this);
         }
 
         componentDidMount() {
             
             const paramsId = this.props.match.params.id;
             const parsedId = parseInt(paramsId);
+
+            const { context } = this.props; 
+            const authedUser = context.authenticatedUser;
+            const emailAddress = authedUser.emailAddress;
+            const password = authedUser.password;
+
+            console.log(authedUser);
+
+            this.setState({
+                emailAddress: emailAddress,
+                password: password
+            });
+
             this.props.context.data.getCoursesById(parsedId).then((respsonse => {
                 if(respsonse) {
                     console.log('True')
@@ -31,12 +49,29 @@ export class CourseDetail extends Component {
 
         }
 
+        deleteCourse = () => {
+
+            const deleteCourse = this.state.courseDetails;
+            const emailAddress = this.state.emailAddress;
+            const password = this.state.password;
+
+            console.log(deleteCourse);
+
+            this.props.context.data.deleteCourse(deleteCourse, emailAddress, password).then((respsonse => {
+                if(respsonse.status === 200) {
+                    console.log('destoryed');
+                }
+            })).catch(error => {
+                console.log('Course not destoryed', error);
+            })
+          };
+
     render () {
 
         const display = this.state.courseDetails;
+        console.log(display)
         const courseOwner = this.state.courseDetails.user;
         console.log(courseOwner)
-
 
         let markdownList = this.state.courseDetails.materialsNeeded;
 
@@ -53,7 +88,7 @@ export class CourseDetail extends Component {
                     <React.Fragment>
                         <div >
                             <NavLink to={`/courses/${paramsId}/update`}  className="linksColumns"> Update </NavLink>
-                            <NavLink to="/updateCourse" className="linksColumns"> Delete </NavLink>
+                            <NavLink to="/" onClick={this.deleteCourse} className="linksColumns"> Delete </NavLink>
                             <NavLink to="/"className="linksColumns" > Return </NavLink>
                         </div> 
                     </React.Fragment>          
@@ -69,7 +104,7 @@ export class CourseDetail extends Component {
      
         return (
         <div className="grid">
-            <div>
+            <div id="tsparticles" className="tsparticles">
                 <div className="gridLeft">
                 <h3> Course </h3>
                 <h1 className="detailH1"> {display.title} </h1>
@@ -89,6 +124,7 @@ export class CourseDetail extends Component {
                 </div> 
 
             </div>
+            <ParticlesContainer/>
         </div>
         )
     }
