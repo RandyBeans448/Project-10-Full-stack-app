@@ -21,6 +21,7 @@ class Courses extends React.Component {
     const authedUser = context.authenticatedUser;
     let displayUser;
     let mappedCourses;
+    let noAuthedUser;
 
     if(authedUser) {
       displayUser = this.props.context.authenticatedUser
@@ -28,13 +29,18 @@ class Courses extends React.Component {
 
     if(this.props.context.courses !== null) {
         mappedCourses = this.props.context.courses.courses.map ((course) =>
-       <li className="linksLi" key={course.id}>  
-        <Link className="links" to={`/courses/${course.id}`}> {course.title} </Link>
-      </li>
-                      
+       <div className="table-cell" key={course.id}> 
+        <p>Course</p> 
+        <NavLink to={`/courses/${course.id}`}> {course.title} </NavLink>
+      </div>
     )
-
-    
+  } else if (this.props.context.courses !== null && authedUser === false) {
+    noAuthedUser = this.props.context.courses.courses.map ((course) =>
+    <div className="table-cell" key={course.id}> 
+     <p>Course</p> 
+     <NavLink to="/signin"> {course.title} </NavLink>
+   </div>
+    )
   } else {
       return (
         <div>
@@ -42,22 +48,21 @@ class Courses extends React.Component {
         </div>
     )
   } 
+
+  
+
+  
     return (
       <div id="tsparticles" className="tsparticles">
         <div className="course-list-div">
-          <h1 className="course-list-h1"> Courses </h1>
-          {/* <h1> Welcome {authedUser.firstName} {authedUser.lastName}</h1>
-          <p>{authedUser.firstName} {authedUser.lastName}s courses</p> */}
-          <div>
-            <ul>
-              <li>{mappedCourses}</li>
-            </ul>
+          <div className="table">  
+              {mappedCourses}
+              {noAuthedUser}
+            <div className="table-cell">
+              <NavLink to="/courses/create"> + New Course </NavLink>
+            </div>
           </div>   
-          <div className="createButton">
-            <li>
-            <Link className="button" to="/courses/create"> Create Course </Link>
-            </li>
-          </div>
+
         </div>
         <ParticlesContainer/>
       </div>
@@ -67,4 +72,5 @@ class Courses extends React.Component {
 }
 
 export default Courses;
+
 
