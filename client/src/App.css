@@ -17,6 +17,34 @@ body {
   z-index:-999999999999999999999999999999999999999999999999999999999;
 }
 
+h1 {
+  color: white;
+}
+
+.sign-up-div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 50%;
+  margin-left: 320px;
+  margin-top: 20px;
+  padding-top: 10px;
+  /* padding-bottom: 50px; */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sign-up-input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  width: 50%;
+  margin: 10px;
+  padding: 20px;
+}
+
+.sign-in-link {
+  color: red;
+}
+
 .sign-in-div {
   text-align: center;
   width: 50%;
@@ -69,6 +97,8 @@ p {
 }
 
 .sign-up-link {
+  padding: 20px;
+  margin-top: 20px;
   color: red;
 }
 
