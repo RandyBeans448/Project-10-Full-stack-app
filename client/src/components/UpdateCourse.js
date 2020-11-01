@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import Data from '../Data';
+import ParticlesContainer from './Particles';
 
 export class UpdateCourse extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export class UpdateCourse extends Component {
             description: '',
             estimatedTime: '',
             materialsNeeded: '',
+            id: '', 
             errors: this.state,
           }
 
@@ -29,6 +31,10 @@ export class UpdateCourse extends Component {
 
         const paramsId = this.props.match.params.id;
         const parsedId = parseInt(paramsId);
+
+        this.setState({
+            id: parsedId
+        });
 
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
@@ -73,6 +79,7 @@ export class UpdateCourse extends Component {
      const { context } = this.props;   
 
      const {
+            
             userId,
             title,
             description,
@@ -88,17 +95,15 @@ export class UpdateCourse extends Component {
            materialsNeeded 
          };
 
-         
-
      const { emailAddress, password } = this.state;
-
+     const { id } = this.state;
         event.preventDefault();
         console.log(updatedCourse)
 
-        context.data.updateCourse(updatedCourse, emailAddress, password).then((respsonse => {
-            if(respsonse.status(204)) {
-                
+        context.data.updateCourse(id, updatedCourse, emailAddress, password).then((respsonse => {
+            if(respsonse) {
                 console.log(respsonse);
+                return <Redirect to="/"/>
             } else {
                 throw new Error
             }
@@ -112,51 +117,49 @@ export class UpdateCourse extends Component {
 
     render () {
 
+        console.log(this.state.id)
         console.log(this.state.title)
         console.log(this.state.userId)
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
     
         return (
-            <div>
-                <form className="grid"  onSubmit={this.handleSubmit}>
-                    <div >
-                        <div  className="gridLeft" >
-                          <h3>Course title</h3>
-                            <div>
-                                <input id="title" name="title" type="text" onChange={this.handleChange} defaultValue={this.state.title}></input>
-                            </div>
-                                <p>By {authedUser.firstName} {authedUser.lastName}</p>
+            <div >
+                <h1 className="update-h1"> Update Course </h1>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="update-div">
+                        <div className="update-div-left">
+                            <h3>Course title</h3>
+                        <div>
+                            <input id="title" name="title" type="text" onChange={this.handleChange} className="update-div-input" defaultValue={this.state.title}></input>
                         </div>
-                            <div>
+                            <p>By {authedUser.firstName} {authedUser.lastName}</p>
+                             <textarea className="text-area-left" id="description" name="description"  onChange={this.handleChange} defaultValue={this.state.description}></textarea>
+                    </div>
+                    <div className="update-div-right">
+                        <ul className="list-style-right">
+                            <li>
+                            <h4>Estimated Time</h4>
                                 <div>
-                                   <textarea className="updateDivRight" id="description" name="description"  onChange={this.handleChange} defaultValue={this.state.description}></textarea>
+                                    <input className="update-div-input-right"  id="estimatedTime" name="estimatedTime" type="text"  onChange={this.handleChange} defaultValue={this.state.estimatedTime}></input>
                                 </div>
-                            </div>
+                            </li>
+                            <li>
+                            <h4 >Materials Needed</h4>
+                                <div>
+                                    <textarea className="text-area-right" id="materialsNeeded" name="materialsNeeded" onChange={this.handleChange} defaultValue={this.state.materialsNeeded}></textarea>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="gridRight">
-                        <div >
-                            <ul>
-                                <li>
-                                <h4 className="h4-update">Estimated Time</h4>
-                                    <div>
-                                        <input className="update-right-input" id="estimatedTime" name="estimatedTime" type="text" onChange={this.handleChange} defaultValue={this.state.estimatedTime}></input>
-                                    </div>
-                                </li>
-                                <li>
-                                <h4 className="h4-update">Materials Needed</h4>
-                                    <div>
-                                        <textarea className="sideTextArea-2" id="materialsNeeded" name="materialsNeeded" onChange={this.handleChange} defaultValue={this.state.materialsNeeded}></textarea>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                    <div >
-                        <button className="button" type="submit">Update Course</button>
-                        <NavLink to="/" >Cancel</NavLink>
+                    <div className="buttons">
+                        <button className="update-button"type="submit">Update Course</button>
+                        <button className="update-button" to="/" >Cancel</button>
                     </div>
+                    <div id="tsparticles" className="tsparticles"/>
                 </form>
+                <ParticlesContainer/>
             </div>
         )
     }
