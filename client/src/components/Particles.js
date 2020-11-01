@@ -57,7 +57,7 @@ class ParticlesContainer extends Component {
               enable: true,
               outMode: "bounce",
               random: false,
-              speed: 6,
+              speed: 1,
               straight: false,
             },
             number: {
@@ -65,7 +65,7 @@ class ParticlesContainer extends Component {
                 enable: true,
                 value_area: 1800,
               },
-              value: 230,
+              value: 180,
             },
             opacity: {
               value: 0.5,
