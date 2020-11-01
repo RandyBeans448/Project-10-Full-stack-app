@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Form from './Form';
+import ParticlesContainer from './Particles';
 
 export class UserSignUp extends Component {
   state = {
@@ -20,29 +21,32 @@ export class UserSignUp extends Component {
       } = this.state;
   
         return (
-    <div >
-        <div className="signUpDiv">
+    <div className="sign-up-div">
+        <div>
           <h1>Sign Up</h1>
           <Form 
           errors={errors}
           submit={this.submit}
           elements={() => (
               <React.Fragment>
-                  <input 
+                  <input
+                    className="sign-up-input" 
                     id="firstName" 
                     name="firstName" 
                     type="text"
                     value={firstName}
                     onChange={this.change} 
                     placeholder="First name" />
-                  <input 
+                  <input
+                    className="sign-up-input" 
                     id="LastName" 
                     name="lastName" 
                     type="text"
                     value={lastName}
                     onChange={this.change} 
                     placeholder="Last Name" />
-                  <input 
+                  <input
+                    className="sign-up-input" 
                     id="emailAddress" 
                     name="emailAddress" 
                     type="text"
@@ -50,6 +54,7 @@ export class UserSignUp extends Component {
                     onChange={this.change} 
                     placeholder="emailAddress" />
                   <input 
+                    className="sign-up-input"
                     id="password" 
                     name="password"
                     type="password"
@@ -59,8 +64,9 @@ export class UserSignUp extends Component {
                 </React.Fragment>
                 )} />
              </div>
+             <ParticlesContainer/>
           <p>
-            Already have a user account? <Link to="/"> Sign in! </Link>  
+            Already have a user account? <Link className="sign-in-link" to="/"> Sign in! </Link>  
           </p>
         </div>
         )
