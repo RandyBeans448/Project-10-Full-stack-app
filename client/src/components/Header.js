@@ -21,7 +21,7 @@ export default class Header extends React.PureComponent {
                 </React.Fragment>                
                 ) : (    
                 <React.Fragment>
-                  <div className="header-div-right">
+                  <div className="header-div-right-up-in">
                   <Link className="header-div-right" to="/signup">Sign Up</Link>
                   <Link className="header-div-right" to="/signin">Sign In</Link>
                   </div>
@@ -34,3 +34,5 @@ export default class Header extends React.PureComponent {
         )
     }
 }
+
+
