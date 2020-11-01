@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import ParticlesContainer from './Particles';
 import Form from './Form';
 
 export default class UserSignIn extends Component {
@@ -18,33 +19,38 @@ export default class UserSignIn extends Component {
 
 
     return (
-      <div>
-        <div className="signInDiv">
-          <h1>Sign In</h1>
+      <div id="tsparticles" className="tsparticles">
+        <div className="sign-in-div">
+          <h1 className="sign-in-h1">Sign In</h1>
           <Form 
           cancel={this.cancel}
           errors={errors}
           submit={this.submit}
           elements={() => (
               <React.Fragment>
-                <input 
+                <div className="input-container">
+                <input
+                  className="sign-in-input" 
                   id="emailAddress" 
                   name="emailAddress" 
                   type="text"
                   onChange={this.change} 
                   placeholder="emailAddress" />
-                <input 
+                <input
+                  className="sign-in-input" 
                   id="password" 
                   name="password"
                   type="password"
                   onChange={this.change} 
                   placeholder="Password" />
+                  </div>
               </React.Fragment>
               )} />
           <p>
-            Don't have a user account? <Link to="/signup">Click here</Link> to sign up!
+            Don't have a user account? <Link className="sign-up-link" to="/signup">Click here</Link> to sign up!
           </p>
         </div>
+        <ParticlesContainer/>
       </div>
     );
   }
