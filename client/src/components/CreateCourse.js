@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Data from '../Data';
+import ParticlesContainer from './Particles';
 
 export class CreateCourse extends Component {
 
@@ -45,9 +46,6 @@ export class CreateCourse extends Component {
             this.setState({
                     [name]: value
             });
-
-            console.log(name);
-            console.log(value);
       };
 
     handleSubmit = (event) => {
@@ -75,8 +73,7 @@ export class CreateCourse extends Component {
         event.preventDefault();
         
         context.data.createCourse(newCourse, emailAddress, password).then((respsonse => {
-            if(respsonse.status === 201) {
-                console.log(respsonse);
+            if (respsonse.status === 201 && newCourse.title !== null && newCourse.description !== null) {
                 this.props.history.push(`/courses/${newCourse.id}`);
             } else {
                 throw new Error
@@ -84,46 +81,60 @@ export class CreateCourse extends Component {
         })).catch(errors => {
             console.log('Course was not created', errors);
             this.setState({ errors });
-            console.log(this.state.errors);
         })
       };
       
     render () {
 
+        let titleVaildation;
+        let descriptionVaildation;
+
+        if (this.state.title === '') {
+            titleVaildation = <p className="create-div-vaildations"> * Please give a value for the title </p>
+        }
+
+        if (this.state.description === '') {
+            descriptionVaildation = <p className="create-div-vaildations"> * Please give a value for the description </p>
+        }
+
         return (
-        <div className="grid">
-            <h1 className="h1-left"> Create course </h1>
+        <div  id="tsparticles" className="tsparticles">
+            <h1 className="create-h1"> Create course </h1>
+            {titleVaildation}
+            {descriptionVaildation}
                 <form onSubmit={this.handleSubmit}> 
-                    <div >
-                        <div className="gridLeft">
-                            <input id="title" name="title" type="text" placeholder="Course title" defaultValue="" className="create-title-input"  onChange={this.handleChange}></input>
+                    <div className="create-div">
+                        <div className="create-div-left">
+                            <h4>Title</h4>
+                            <input id="title" name="title" type="text" placeholder="Course title" defaultValue="" className="create-div-input"  onChange={this.handleChange}></input>
                             <h4>Course description</h4>
-                            <textarea id="description" name="description" placeholder="Course description" onChange={this.handleChange}></textarea>
+                            <textarea id="description" className="text-area-left" name="description" placeholder="Course description" onChange={this.handleChange}></textarea>
                         </div>
-                        <div className="gridRight">
+                        <div className="create-div-right">
                             <ul>
-                                <li>
+                                <li className="create-div-li">
                                     <h4 className="h4-create">Estimated Time</h4>
                                         <div>
-                                            <input id="estimatedTime" name="estimatedTime" type="text" placeholder="Hours" className="create-time-input" onChange={this.handleChange} ></input>
+                                            <input id="estimatedTime" name="estimatedTime" type="text" placeholder="Hours" className="create-div-input-right" onChange={this.handleChange} ></input>
                                         </div>
                                 </li>
-                                <li >
+                                <li className="create-div-li">
                                     <h4 className="h4-create">Materials Needed</h4>
                                         <div>
-                                            <textarea id="materialsNeeded" className="sideTextArea" name="materialsNeeded" placeholder="List materials" onChange={this.handleChange}></textarea>
+                                            <textarea id="materialsNeeded" className="create-textarea-right" name="materialsNeeded" placeholder="List materials" onChange={this.handleChange}></textarea>
                                         </div>
                                 </li>
                             </ul>
                         </div>
             
                     </div>
-                        <div>
-                            <button type="submit" className="linksColumns">Create Course</button>
-                            <button className="linksColumns">Cancel</button>
+                        <div className="create-div-buttons">
+                            <button className="create-buttons" type="submit">Create Course</button>
+                            <button className="create-buttons" >Cancel</button>
                         </div>
                 </form>
-        </div>
+                <ParticlesContainer/>
+                </div>
         )
     }
 }
