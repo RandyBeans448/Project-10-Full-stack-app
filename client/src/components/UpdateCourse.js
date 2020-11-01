@@ -103,7 +103,7 @@ export class UpdateCourse extends Component {
         context.data.updateCourse(id, updatedCourse, emailAddress, password).then((respsonse => {
             if(respsonse) {
                 console.log(respsonse);
-                return <Redirect to="/"/>
+                
             } else {
                 throw new Error
             }
