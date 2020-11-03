@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Form from './Form';
 import ParticlesContainer from './Particles';
 
@@ -66,7 +66,7 @@ export class UserSignUp extends Component {
              </div>
              <ParticlesContainer/>
           <p>
-            Already have a user account? <Link className="sign-in-link" to="/"> Sign in! </Link>  
+            Already have a user account? <Link className="sign-in-link" to="/signin"> Sign in! </Link>  
           </p>
         </div>
         )
