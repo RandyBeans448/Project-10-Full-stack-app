@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ParticlesContainer from './Particles';
 const ReactMarkdown = require('react-markdown')
 
 export class CourseDetail extends Component {
 
         constructor(props) {
-            super(props);
+            super(props)
             this.state = {
                 authenticatedUser: this.state,
                 emailAddress: '',
                 password: '',
                 courses: [],
-                errors: '',
+                errors: [],
                 courseDetails: [],
                 userId: [],
                 id: '', 
@@ -23,24 +23,13 @@ export class CourseDetail extends Component {
 
         componentDidMount() {
             
+            const { context } = this.props; 
             const paramsId = this.props.match.params.id;
             const parsedId = parseInt(paramsId);
 
             this.setState({
                 id: parsedId
             })
-
-            const { context } = this.props; 
-            const authedUser = context.authenticatedUser;
-            const emailAddress = authedUser.emailAddress;
-            const password = authedUser.password;
-
-            console.log(authedUser);
-
-            this.setState({
-                emailAddress: emailAddress,
-                password: password
-            });
 
             context.data.getCoursesById(parsedId).then((respsonse => {
                 if(respsonse) {
@@ -52,25 +41,26 @@ export class CourseDetail extends Component {
             })).catch(error => {
                 console.log('Course does not exsist', error)
             })
-
-
-
         }
 
         deleteCourse = () => {
 
             const { context } = this.props; 
-            const emailAddress = this.state.emailAddress;
-            const password = this.state.password;
             const { id } = this.state
+            const authedUser = context.authenticatedUser;
+            const emailAddress = authedUser.emailAddress;
+            const password = authedUser.password;
 
-            console.log(emailAddress);
-            console.log("Email address is filled")         
+            if (this.state.authenticatedUser) {
+                this.setState({
+                    emailAddress: emailAddress,
+                    password: password
+                });
+            }
 
             context.data.deleteCourse(id, emailAddress, password).then((respsonse => {
-                if(respsonse.status === 200) {
-                    console.log('destoryed');
-                    // return <Redirect to='/'/>
+                if(respsonse) {
+                    console.log('destoryed');          
                 }
             })).catch(errors => {
                 console.log('Course not destoryed', errors);
@@ -84,67 +74,60 @@ export class CourseDetail extends Component {
         const display = this.state.courseDetails;
 
         const userId = this.state.userId;
+        const user = display.user;
+        console.log(user)
+
+        // const firstName = user.user.firstName;
+        // console.log(firstName)
 
         let markdownList = this.state.courseDetails.materialsNeeded;
+        let markdownDesc = this.state.courseDetails.description;
 
         let updateAndDeleteBtns;
-        let returnBtn;
      
         const paramsId = this.props.match.params.id;
-        const parsedId = parseInt(paramsId);
 
         if (this.props.context.authenticatedUser !== null) {
             if (this.props.context.authenticatedUser.id === userId) {
   
                 updateAndDeleteBtns = 
+
                     <React.Fragment>
-                        <div >
                             <NavLink to={`/courses/${paramsId}/update`}  className="nav-button"> Update </NavLink>
                             <NavLink to="/" onClick={this.deleteCourse}  className="nav-button"> Delete </NavLink>
-                            <NavLink to="/" className="nav-button" > Return </NavLink>
-                        </div> 
                     </React.Fragment>          
-            } else {
-                returnBtn = 
-                    <React.Fragment>
-                        <div>  
-                            <NavLink to="/" className="nav-button"> Return </NavLink>
-                        </div> 
-                    </React.Fragment> 
-            }
+            } 
         }
      
         return (
-        <div className="action-margin">
-            <div className="action-bar">
-            {updateAndDeleteBtns}
-            {returnBtn}
-            </div>
-            <div className="detail-div">
-            <div >
-                <div className="detail-div-left">
-                <h3> Course </h3>
-                <h1 className="detailH1"> {display.title} </h1>
-                <h3> Owner </h3>
-                {/* <h3> {courseOwner.firstName}  {courseOwner.lastName} </h3> */}
-                <p className="detailDesc"> {display.description} </p>
+            <div className="action-margin">
+                <div className="action-bar">
+                <NavLink to="/" className="nav-button"> Return </NavLink>
+                {updateAndDeleteBtns}
                 </div>
-                <div className="detail-div-right">
-                    <h3> Estimated time </h3>             
-                    <p> {display.estimatedTime} </p>
-                    <h3> Materials </h3>
-                    <ul className="list-detail-style-right">
-                        <li > <ReactMarkdown source={markdownList}/> </li>
-                    </ul>
+            <div className="detail-div">
+                <div >
+                <div className="detail-div-left">
+                    <h3> Course </h3>
+                    <h1 className="detailH1"> {display.title} </h1>
+                    <h3> Owner </h3>
+                    {/* <h3> {user.firstName}  {user.lastName} </h3> */}
+                    <span className="detailDesc"> <ReactMarkdown source={markdownDesc}/> </span>
+                </div>
+                    <div className="detail-div-right">
+                        <h3> Estimated time </h3>             
+                        <p> {display.estimatedTime} </p>
+                        <h3> Materials </h3>
+                            <ul className="list-detail-style-right">
+                                <li > <ReactMarkdown source={markdownList}/> </li>
+                            </ul>
                     <div id="tsparticles" className="tsparticles">
-
-                    
-                </div> 
+                    </div> 
                 </div>
             </div>
             <ParticlesContainer/>
+                </div>
             </div>
-        </div>
         )
     }
 }
