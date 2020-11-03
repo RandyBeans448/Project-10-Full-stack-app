@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Header extends React.PureComponent {
-  render() {
-      const { context } = this.props; 
+export default ({ context }) => {
       const authedUser = context.authenticatedUser;
         return (
           <div>
@@ -27,12 +25,9 @@ export default class Header extends React.PureComponent {
                   </div>
                 </React.Fragment>
                 )}
-           
             </nav>
           </div>
          </div> 
         )
     }
-}
-
 
