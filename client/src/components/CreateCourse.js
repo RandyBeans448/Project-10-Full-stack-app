@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink} from 'react-router-dom';
 import Data from '../Data';
 import ParticlesContainer from './Particles';
 
@@ -16,7 +17,7 @@ export class CreateCourse extends Component {
             description: '',
             estimatedTime: '',
             materialsNeeded: '',
-            errors: this.state,
+            errors: [],
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,6 +52,7 @@ export class CreateCourse extends Component {
     handleSubmit = (event) => {
 
         const { context } = this.props;
+        const { history } = this.props;
 
         const {
                userId, 
@@ -74,7 +76,7 @@ export class CreateCourse extends Component {
         
         context.data.createCourse(newCourse, emailAddress, password).then((respsonse => {
             if (respsonse.status === 201 && newCourse.title !== null && newCourse.description !== null) {
-                this.props.history.push(`/courses/${newCourse.id}`);
+                history.push(`/courses/${newCourse.id}`);
             } else {
                 throw new Error
             }
@@ -82,6 +84,7 @@ export class CreateCourse extends Component {
             console.log('Course was not created', errors);
             this.setState({ errors });
         })
+        console.log(newCourse.id)
       };
       
     render () {
@@ -96,7 +99,7 @@ export class CreateCourse extends Component {
         if (this.state.description === '') {
             descriptionVaildation = <p className="create-div-vaildations"> * Please give a value for the description </p>
         }
-
+        
         return (
         <div  id="tsparticles" className="tsparticles">
             <h1 className="create-h1"> Create course </h1>
@@ -130,7 +133,7 @@ export class CreateCourse extends Component {
                     </div>
                         <div className="create-div-buttons">
                             <button className="create-buttons" type="submit">Create Course</button>
-                            <button className="create-buttons" >Cancel</button>
+                            <NavLink className="create-buttons" to="/" >Cancel</NavLink>
                         </div>
                 </form>
                 <ParticlesContainer/>
