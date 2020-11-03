@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ParticlesContainer from './Particles';
 import Form from './Form';
 
@@ -11,11 +11,7 @@ export default class UserSignIn extends Component {
   }
 
   render() {
-    const {
-      emailAddress,
-      password,
-      errors,
-    } = this.state;
+    const { errors } = this.state;
 
 
     return (
