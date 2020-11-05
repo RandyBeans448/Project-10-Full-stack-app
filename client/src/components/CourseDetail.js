@@ -59,13 +59,11 @@ export class CourseDetail extends Component {
 
             context.data.deleteCourse(id, emailAddress, password).then((response => {
                 if(response) {
-                    console.log('destroyed');   
                     this.props.history.push('/');   
                 }
             })).catch(errors => {
                 console.log('Course not destroyed', errors);
                 this.setState({ errors });
-                console.log(this.state.errors);
             })
           };
 
@@ -74,9 +72,6 @@ export class CourseDetail extends Component {
         const { courseDetails } = this.state
         const userId = courseDetails.userId;
         const user = courseDetails.user;
-        
-        console.log(this.state.firstName)
-        console.log(this.state.lastName)
 
         let markdownList = courseDetails.materialsNeeded;
         let markdownDesc = courseDetails.description;
