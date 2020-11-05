@@ -56,7 +56,6 @@ export class UpdateCourse extends Component {
         context.data.getCoursesById(parsedId).then((response => {
 
             if(response) {
-                console.log('True');
                 this.setState({
                     title: response.course.title,
                     description: response.course.description,
@@ -118,7 +117,6 @@ export class UpdateCourse extends Component {
         if(updatedCourse.title !== '' && updatedCourse.description !== '') {
             context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
                 if(response) {
-                    console.log(response);
                     this.props.history.push('/');
                 } else {
                     throw new Error
@@ -129,7 +127,6 @@ export class UpdateCourse extends Component {
                 console.log(this.state.errors);
             })
         }
-    
       };
 
     render () {
