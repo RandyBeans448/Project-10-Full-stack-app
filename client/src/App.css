@@ -306,12 +306,15 @@ margin-left: 70px;
 
 
 .action-bar {
+  display: inline-block;
   width: 100%;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 }  
 
 .nav-button {
+  display: inline-block;
+  cursor: pointer; 
   padding-top: 7.5px;
   padding-bottom: 7.5px;
   padding-left: 30px;
@@ -345,7 +348,7 @@ margin-left: 70px;
   list-style-type: none;
 }
 
-.create-div-vaildations {
+.create-div-validations {
   color: red;
   margin-left: 70px;
   font-size: 20px;
