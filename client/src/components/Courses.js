@@ -27,7 +27,7 @@ class Courses extends React.Component {
     if(this.props.context.courses !== null) {
       
         mappedCourses = this.props.context.courses.courses.map ((course) =>
-       <div className="table-cell" key={course.id}> 
+        <div className="table-cell" key={course.id}> 
         <p>Course</p> 
         <NavLink to={`/courses/${course.id}`}> {course.title} </NavLink>
       </div>
@@ -48,9 +48,6 @@ class Courses extends React.Component {
         </div>
     )
   } 
-
-  
-
   
     return (
       <div id="tsparticles" className="tsparticles">
