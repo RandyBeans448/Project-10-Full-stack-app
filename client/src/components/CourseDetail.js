@@ -15,7 +15,9 @@ export class CourseDetail extends Component {
                 errors: [],
                 courseDetails: [],
                 userId: [],
-                id: '', 
+                id: '',
+                firstName: null,
+                lastName: null, 
               }
 
               this.deleteCourse = this.deleteCourse.bind(this);
@@ -31,17 +33,21 @@ export class CourseDetail extends Component {
                 id: parsedId
             })
 
-            context.data.getCoursesById(parsedId).then((respsonse => {
-                if(respsonse) {
+            context.data.getCoursesById(parsedId).then((response => {
+                if(response) {
                     this.setState({
-                        courseDetails: respsonse.course,
-                        userId: respsonse.course.userId
+                        courseDetails: response.course,
+                        userId: response.course.userId,
+                        firstName: response.course.user.firstName,
+                        lastName: response.course.user.lastName
                     })
                 }
             })).catch(error => {
-                console.log('Course does not exsist', error)
+                console.log('Course does not exist', error)
             })
         }
+        
+        
 
         deleteCourse = () => {
 
@@ -51,19 +57,13 @@ export class CourseDetail extends Component {
             const emailAddress = authedUser.emailAddress;
             const password = authedUser.password;
 
-            if (this.state.authenticatedUser) {
-                this.setState({
-                    emailAddress: emailAddress,
-                    password: password
-                });
-            }
-
-            context.data.deleteCourse(id, emailAddress, password).then((respsonse => {
-                if(respsonse) {
-                    console.log('destoryed');          
+            context.data.deleteCourse(id, emailAddress, password).then((response => {
+                if(response) {
+                    console.log('destroyed');   
+                    this.props.history.push('/');   
                 }
             })).catch(errors => {
-                console.log('Course not destoryed', errors);
+                console.log('Course not destroyed', errors);
                 this.setState({ errors });
                 console.log(this.state.errors);
             })
@@ -71,17 +71,15 @@ export class CourseDetail extends Component {
 
     render () {
 
-        const display = this.state.courseDetails;
+        const { courseDetails } = this.state
+        const userId = courseDetails.userId;
+        const user = courseDetails.user;
+        
+        console.log(this.state.firstName)
+        console.log(this.state.lastName)
 
-        const userId = this.state.userId;
-        const user = display.user;
-        console.log(user)
-
-        // const firstName = user.user.firstName;
-        // console.log(firstName)
-
-        let markdownList = this.state.courseDetails.materialsNeeded;
-        let markdownDesc = this.state.courseDetails.description;
+        let markdownList = courseDetails.materialsNeeded;
+        let markdownDesc = courseDetails.description;
 
         let updateAndDeleteBtns;
      
@@ -94,7 +92,7 @@ export class CourseDetail extends Component {
 
                     <React.Fragment>
                             <NavLink to={`/courses/${paramsId}/update`}  className="nav-button"> Update </NavLink>
-                            <NavLink to="/" onClick={this.deleteCourse}  className="nav-button"> Delete </NavLink>
+                            <button to="/" onClick={this.deleteCourse}  className="nav-button"> Delete </button>
                     </React.Fragment>          
             } 
         }
@@ -109,14 +107,14 @@ export class CourseDetail extends Component {
                 <div >
                 <div className="detail-div-left">
                     <h3> Course </h3>
-                    <h1 className="detailH1"> {display.title} </h1>
+                    <h1 className="detailH1"> {courseDetails.title} </h1>
                     <h3> Owner </h3>
-                    {/* <h3> {user.firstName}  {user.lastName} </h3> */}
+                    <h3> {this.state.firstName}  {this.state.lastName} </h3>
                     <span className="detailDesc"> <ReactMarkdown source={markdownDesc}/> </span>
                 </div>
                     <div className="detail-div-right">
                         <h3> Estimated time </h3>             
-                        <p> {display.estimatedTime} </p>
+                        <p> {courseDetails.estimatedTime} </p>
                         <h3> Materials </h3>
                             <ul className="list-detail-style-right">
                                 <li > <ReactMarkdown source={markdownList}/> </li>
