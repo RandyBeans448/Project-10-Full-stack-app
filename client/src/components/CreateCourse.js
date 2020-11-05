@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Data from '../Data';
 import ParticlesContainer from './Particles';
 
@@ -52,7 +52,6 @@ export class CreateCourse extends Component {
     handleSubmit = (event) => {
 
         const { context } = this.props;
-        const { history } = this.props;
 
         const {
                userId, 
@@ -74,9 +73,9 @@ export class CreateCourse extends Component {
 
         event.preventDefault();
         
-        context.data.createCourse(newCourse, emailAddress, password).then((respsonse => {
-            if (respsonse.status === 201 && newCourse.title !== null && newCourse.description !== null) {
-                history.push(`/courses/${newCourse.id}`);
+        context.data.createCourse(newCourse, emailAddress, password).then((response => {
+            if (response && newCourse.title !== null && newCourse.description !== null) {
+                this.props.history.push('/');
             } else {
                 throw new Error
             }
@@ -84,27 +83,26 @@ export class CreateCourse extends Component {
             console.log('Course was not created', errors);
             this.setState({ errors });
         })
-        console.log(newCourse.id)
       };
       
     render () {
 
-        let titleVaildation;
-        let descriptionVaildation;
+        let titleValidation;
+        let descriptionValidation;
 
         if (this.state.title === '') {
-            titleVaildation = <p className="create-div-vaildations"> * Please give a value for the title </p>
+            titleValidation = <p className="create-div-validations"> * Please give a value for the title </p>
         }
 
         if (this.state.description === '') {
-            descriptionVaildation = <p className="create-div-vaildations"> * Please give a value for the description </p>
+            descriptionValidation = <p className="create-div-validations"> * Please give a value for the description </p>
         }
         
         return (
         <div  id="tsparticles" className="tsparticles">
             <h1 className="create-h1"> Create course </h1>
-            {titleVaildation}
-            {descriptionVaildation}
+            {titleValidation}
+            {descriptionValidation}
                 <form onSubmit={this.handleSubmit}> 
                     <div className="create-div">
                         <div className="create-div-left">
