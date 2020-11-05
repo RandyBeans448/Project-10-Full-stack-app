@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Data from '../Data';
 import ParticlesContainer from './Particles';
 
@@ -53,25 +53,25 @@ export class UpdateCourse extends Component {
 
         // Using the rest api get method to retrive the course based on the course id 
 
-        context.data.getCoursesById(parsedId).then((respsonse => {
+        context.data.getCoursesById(parsedId).then((response => {
 
-            if(respsonse) {
+            if(response) {
                 console.log('True');
                 this.setState({
-                    title: respsonse.course.title,
-                    description: respsonse.course.description,
-                    estimatedTime: respsonse.course.estimatedTime,
-                    materialsNeeded: respsonse.course.materialsNeeded,
-                    userId: respsonse.course.userId
+                    title: response.course.title,
+                    description: response.course.description,
+                    estimatedTime: response.course.estimatedTime,
+                    materialsNeeded: response.course.materialsNeeded,
+                    userId: response.course.userId
                 })
             }
         })).catch(error => {
-            console.log('Course does not exsist', error);
+            console.log('Course does not exists', error);
         })
     }
 
     /*
-    Takes the value from each textbox or input and sets the state to the value of the corresponding name
+    Takes the value from each text box or input and sets the state to the value of the corresponding name
     */
 
     handleChange = (event) => {
@@ -116,9 +116,10 @@ export class UpdateCourse extends Component {
      //Put request requires the id of the course as well as the user email and password to make a change.
 
         if(updatedCourse.title !== '' && updatedCourse.description !== '') {
-            context.data.updateCourse(id, updatedCourse, emailAddress, password).then((respsonse => {
-                if(respsonse) {
-                    console.log(respsonse);
+            context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
+                if(response) {
+                    console.log(response);
+                    this.props.history.push('/');
                 } else {
                     throw new Error
                 }
@@ -136,27 +137,27 @@ export class UpdateCourse extends Component {
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
 
-        let titleVaildation;
-        let descriptionVaildation;
+        let titleValidation;
+        let descriptionValidation;
 
         /*
-         if the the values of title and descriptions are empty vaildation errors will be rendered 
+         if the the values of title and descriptions are empty Validation errors will be rendered 
          to let the user know to fill in each field
         */
 
         if (this.state.title === '') {
-            titleVaildation = <p className="create-div-vaildations"> * Please give a value for the title </p>
+            titleValidation = <p className="create-div-validations"> * Please give a value for the title </p>
         }
 
         if (this.state.description === '') {
-            descriptionVaildation = <p className="create-div-vaildations"> * Please give a value for the description </p>
+            descriptionValidation = <p className="create-div-validations"> * Please give a value for the description </p>
         }
         
         return (
             <div >
                 <h1 className="update-h1"> Update Course </h1>
-                {titleVaildation}
-                {descriptionVaildation}
+                {titleValidation}
+                {descriptionValidation}
                 <form onSubmit={this.handleSubmit}>
                     <div className="update-div">
                         <div className="update-div-left">
