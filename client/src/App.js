@@ -1,14 +1,12 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch
 } from 'react-router-dom';
 
 
 import './App.css';
-import ParticlesContainer from './components/Particles';
 import CourseDetail from './components/CourseDetail';
 import Courses from './components/Courses';
 import CreateCourse from './components/CreateCourse';
@@ -20,9 +18,8 @@ import UserSignUp from './components/UserSignUp';
 import NotFound from './components/NotFound';
 import PrivateRoute from './PrivateRoute';
 import withContext from './Context';
-import ErrorBoundary from './components/ErrorBoundary';
 
-//Conneting the SignUp & SignIn to context.
+//Connecting the SignUp & SignIn to context.
 
 //This shares the data and actions throughout the component tree
 
