@@ -72,7 +72,7 @@ Data API utility methods available throughout the app via Context */
           }
 
         usersCourses = async () => {
-          const userCourses = await this.data.getCourses().then((response) => {
+          await this.data.getCourses().then((response) => {
             let receivedCourses = response;
             if (receivedCourses) {
               this.setState(() => {
@@ -103,4 +103,3 @@ export default function withContext(Component) {
       );
     }
   }
-
