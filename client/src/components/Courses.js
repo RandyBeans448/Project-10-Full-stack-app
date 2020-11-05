@@ -71,4 +71,3 @@ class Courses extends React.Component {
 }
 
 export default Courses;
-
