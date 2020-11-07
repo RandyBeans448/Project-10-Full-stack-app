@@ -11,8 +11,8 @@ export default class UserSignIn extends Component {
   }
 
   render() {
-    const { errors } = this.state;
 
+    const { errors } = this.state;
 
     return (
       <div id="tsparticles" className="tsparticles">
@@ -67,7 +67,7 @@ export default class UserSignIn extends Component {
 
 
 /*
-this submit function unpacks this.state into varibles.
+this submit function unpacks this.state into variables.
 The function signIn is accessed through the context property
 which was passed from context.js.
 */
