@@ -27,6 +27,14 @@ export class CreateCourse extends Component {
 
     componentDidMount() {
 
+    /*
+
+    State for password, emailAddress and userId set from the details
+    from the logged in user
+
+    */      
+
+
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
         const emailAddress = authedUser.emailAddress;
@@ -39,6 +47,11 @@ export class CreateCourse extends Component {
             userId: userId
         })
     }
+
+    /* 
+        Takes the value from each text box or input and
+        sets the state to the value of the corresponding name
+    */
 
     handleChange = (event) => {
         const target = event.target;
@@ -53,6 +66,8 @@ export class CreateCourse extends Component {
 
         const { context } = this.props;
 
+    // Takes the state of each value needed to authenticate a POST request from the Rest Api.    
+
         const {
                userId, 
                title,
@@ -60,7 +75,9 @@ export class CreateCourse extends Component {
                estimatedTime,
                materialsNeeded 
                } = this.state;
-              
+         
+     // Creates a new object with each property as the value of each corresponding state           
+
         const newCourse = {
               userId,
               title,
@@ -70,6 +87,9 @@ export class CreateCourse extends Component {
             };
 
         const { emailAddress, password } = this.state;
+    
+     // The POST request is made if title and description are not empty
+     // POST request requires user email and password to make the request.    
 
         event.preventDefault();
         
@@ -86,6 +106,13 @@ export class CreateCourse extends Component {
       };
       
     render () {
+
+        /*
+
+        If the the values of title and descriptions are empty Validation errors will be rendered 
+        to let the user know to fill in each field.
+
+        */
 
         let titleValidation;
         let descriptionValidation;
