@@ -25,6 +25,8 @@ export class CourseDetail extends Component {
 
         componentDidMount() {
             
+            // Setting the initial state of id to the params
+
             const { context } = this.props; 
             const paramsId = this.props.match.params.id;
             const parsedId = parseInt(paramsId);
@@ -32,6 +34,14 @@ export class CourseDetail extends Component {
             this.setState({
                 id: parsedId
             })
+
+           /*
+           Get request responds by retrieving the course that relates to
+           the state of id.
+           The states of firstName and lastName are initially set to null.
+           The GET request responds after the page is rendered and requires a value 
+           otherwise it comes back as undefined
+           */
 
             context.data.getCoursesById(parsedId).then((response => {
                 if(response) {
@@ -51,30 +61,49 @@ export class CourseDetail extends Component {
 
         deleteCourse = () => {
 
+            /*
+            Setting the state of the emailAddress & password so that 
+            the deleteCourse can take them as arguments.
+            Function requires authorization to fire.
+            State set in the function so that anyone who isn't logged in
+            can view the page.
+            */
+
             const { context } = this.props; 
             const { id } = this.state
             const authedUser = context.authenticatedUser;
             const emailAddress = authedUser.emailAddress;
             const password = authedUser.password;
 
+            //Deletes course and takes the states of id, emailAddress and password as arguments 
+
             context.data.deleteCourse(id, emailAddress, password).then((response => {
                 if(response) {
+                    console.log('destroyed');   
                     this.props.history.push('/');   
                 }
             })).catch(errors => {
                 console.log('Course not destroyed', errors);
                 this.setState({ errors });
+                console.log(this.state.errors);
             })
           };
 
     render () {
 
+        //courseDetails state needed for displaying its properties
+
         const { courseDetails } = this.state
         const userId = courseDetails.userId;
-        const user = courseDetails.user;
 
         let markdownList = courseDetails.materialsNeeded;
         let markdownDesc = courseDetails.description;
+
+        /*
+        If a user is logged in and the authenticated user matches the userId
+        of the course then this will allow the authenticated user to 
+        update and delete.
+        */
 
         let updateAndDeleteBtns;
      
