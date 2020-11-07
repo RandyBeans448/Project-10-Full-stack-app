@@ -23,7 +23,7 @@ export class UpdateCourse extends Component {
 
           this.handleSubmit = this.handleSubmit.bind(this);
           this.handleChange = this.handleChange.bind(this);
-          
+
     }
 
 
@@ -51,11 +51,12 @@ export class UpdateCourse extends Component {
             password: password
         });
 
-        // Using the rest api get method to retrive the course based on the course id 
+        // Using the rest api get method to retrieve the course based on the course id 
 
         context.data.getCoursesById(parsedId).then((response => {
 
             if(response) {
+                console.log('True');
                 this.setState({
                     title: response.course.title,
                     description: response.course.description,
@@ -69,9 +70,7 @@ export class UpdateCourse extends Component {
         })
     }
 
-    /*
-    Takes the value from each text box or input and sets the state to the value of the corresponding name
-    */
+    // Takes the value from each text box or input and sets the state to the value of the corresponding name
 
     handleChange = (event) => {
         const target = event.target;
@@ -111,12 +110,13 @@ export class UpdateCourse extends Component {
 
         event.preventDefault();
      
-     //The PUT request is made if title and description are not empty
-     //Put request requires the id of the course as well as the user email and password to make a change.
+     // The PUT request is made if title and description are not empty
+     // PUT request requires the id of the course as well as the user email and password to make a change.
 
         if(updatedCourse.title !== '' && updatedCourse.description !== '') {
             context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
                 if(response) {
+                    console.log(response);
                     this.props.history.push('/');
                 } else {
                     throw new Error
@@ -138,8 +138,10 @@ export class UpdateCourse extends Component {
         let descriptionValidation;
 
         /*
-         if the the values of title and descriptions are empty Validation errors will be rendered 
-         to let the user know to fill in each field
+
+         If the the values of title and descriptions are empty Validation errors will be rendered 
+         to let the user know to fill in each field.
+
         */
 
         if (this.state.title === '') {
