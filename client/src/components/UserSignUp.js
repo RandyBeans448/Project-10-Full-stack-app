@@ -4,6 +4,7 @@ import Form from './Form';
 import ParticlesContainer from './Particles';
 
 export class UserSignUp extends Component {
+
   state = {
     firstName: '',
     lastName: '',
@@ -11,7 +12,9 @@ export class UserSignUp extends Component {
     password: '',
     errors: [],
   }
+
     render () {
+
       const {
         firstName,
         lastName,
@@ -20,7 +23,7 @@ export class UserSignUp extends Component {
         errors,
       } = this.state;
   
-        return (
+    return (
     <div className="sign-up-div">
         <div>
           <h1>Sign Up</h1>
@@ -73,6 +76,7 @@ export class UserSignUp extends Component {
     }
 
     change = (event) => {
+
       const name = event.target.name;
       const value = event.target.value;
       
@@ -81,13 +85,13 @@ export class UserSignUp extends Component {
           [name]: value
         };        
       });
-      console.log(name);
-      console.log(value);
     }
 
     submit = () => {
 
       const { context } = this.props;
+
+    // Takes the state of each value needed to authenticate a PUT request from the REST API.
 
       const { 
         firstName,
@@ -96,12 +100,19 @@ export class UserSignUp extends Component {
         password
       } = this.state;
 
+    // Creates a new object with each property as the value of each corresponding state  
+
       const user =  { 
         firstName,
         lastName,
         emailAddress,
         password
       };
+
+    /*
+    Create user takes the user object to create the new user and then signs in the user using the 
+    emailAddress and password properties as arguments.    
+    */  
 
       context.data.createUser(user)
         .then( errors => {
