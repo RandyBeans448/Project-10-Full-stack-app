@@ -81,7 +81,8 @@ router.get('/courses', asyncHandler(async (req, res, next) => {
         attributes: { exclude: ['password','createdAt', 'updatedAt'] }
       },
     ],
-    attributes: { exclude: ['createdAt', 'updatedAt'] }
+    attributes:
+    { exclude: ['createdAt', 'updatedAt'] }
   },
   
   );
@@ -89,10 +90,20 @@ router.get('/courses', asyncHandler(async (req, res, next) => {
     res.json({ courses });
 }));
 
-//Find specfic course
-router.get('/courses/:id', asyncHandler(async (req, res, next) => {
+//Find specific course
+router.get('/courses/:id', asyncHandler(async (req, res) => {
   console.log('Starting');
     const course = await Course.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: { 
+            include: ['firstName', 'lastName', 'emailAddress', 'id'],
+            exclude: ['password','createdAt', 'updatedAt']
+         }
+        },
+      ],
       attributes: { exclude: ['createdAt', 'updatedAt'] }
     });
     console.log(course);
