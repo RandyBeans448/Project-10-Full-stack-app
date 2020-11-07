@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default ({ context }) => {
+
       const authedUser = context.authenticatedUser;
+
+      //Nav bar conditionally rendered on if the user is logged in or not
+      
         return (
           <div>
             <div className="header-div">
@@ -11,19 +15,23 @@ export default ({ context }) => {
               </div>
               <nav>
                 {authedUser ? (
-                  <React.Fragment>
-                      <div className="header-div-right">
-                      <span className="header-div-right"> Welcome {authedUser.firstName} {authedUser.lastName}  </span>
-                        <Link className="header-div-right"  to="/signout"> Sign Out </Link>
-                      </div>
-                </React.Fragment>                
-                ) : (    
+
                 <React.Fragment>
-                  <div className="header-div-right-up-in">
-                  <Link className="header-div-right" to="/signup">Sign Up</Link>
-                  <Link className="header-div-right" to="/signin">Sign In</Link>
+                  <div className="header-div-right">
+                    <span className="header-div-right"> Welcome {authedUser.firstName} {authedUser.lastName} </span>
+                    <Link className="header-div-right"  to="/signout"> Sign Out </Link>
                   </div>
                 </React.Fragment>
+
+                ) : (
+
+                <React.Fragment>
+                  <div className="header-div-right-up-in">
+                    <Link className="header-div-right" to="/signup">Sign Up</Link>
+                    <Link className="header-div-right" to="/signin">Sign In</Link>
+                  </div>
+                </React.Fragment>
+
                 )}
             </nav>
           </div>
