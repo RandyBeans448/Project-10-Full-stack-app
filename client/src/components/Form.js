@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default (props) => {
   const {
@@ -21,6 +22,7 @@ export default (props) => {
         {elements()}
         <div>
           <button className="signInBtn" type="submit">Submit</button>
+          <NavLink className="button-2" to="/">Cancel</NavLink>
         </div>
       </form>
     </div>
