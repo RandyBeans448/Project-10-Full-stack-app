@@ -18,7 +18,6 @@ export class UpdateCourse extends Component {
             estimatedTime: '',
             materialsNeeded: '',
             id: '', 
-            errors: [],
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,7 +55,6 @@ export class UpdateCourse extends Component {
         context.data.getCoursesById(parsedId).then((response => {
 
             if(response) {
-                console.log('True');
                 this.setState({
                     title: response.course.title,
                     description: response.course.description,
@@ -123,10 +121,6 @@ export class UpdateCourse extends Component {
                 }
             })).catch(errors => {
                 console.log('Course was not updated', errors);
-                this.setState({
-                    errors: errors
-                });
-                console.log(this.state.errors);
             })
         }
       };
@@ -135,10 +129,6 @@ export class UpdateCourse extends Component {
 
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
-
-        const { errors } = this.state;
-
-        console.log(errors);
 
         let titleValidation;
         let descriptionValidation;
