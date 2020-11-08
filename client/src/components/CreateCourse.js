@@ -97,7 +97,7 @@ export class CreateCourse extends Component {
             if (response && newCourse.title !== null && newCourse.description !== null) {
                 this.props.history.push('/');
             } else {
-                throw new Error
+                throw new Error();
             }
         })).catch(errors => {
             console.log('Course was not created', errors);
