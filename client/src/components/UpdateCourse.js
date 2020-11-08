@@ -113,17 +113,19 @@ export class UpdateCourse extends Component {
      // The PUT request is made if title and description are not empty
      // PUT request requires the id of the course as well as the user email and password to make a change.
 
-        if(updatedCourse.title !== '' && updatedCourse.description !== '') {
+        if(updatedCourse.title !== '' || updatedCourse.description !== '') {
             context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
                 if(response) {
                     console.log(response);
                     this.props.history.push('/');
                 } else {
-                    throw new Error
+                    throw new Error();
                 }
             })).catch(errors => {
                 console.log('Course was not updated', errors);
-                this.setState({ errors });
+                this.setState({
+                    errors: errors
+                });
                 console.log(this.state.errors);
             })
         }
@@ -134,14 +136,16 @@ export class UpdateCourse extends Component {
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
 
+        const { errors } = this.state;
+
+        console.log(errors);
+
         let titleValidation;
         let descriptionValidation;
 
         /*
-
          If the the values of title and descriptions are empty Validation errors will be rendered 
          to let the user know to fill in each field.
-
         */
 
         if (this.state.title === '') {
@@ -162,10 +166,10 @@ export class UpdateCourse extends Component {
                         <div className="update-div-left">
                             <h3>Course title</h3>
                         <div>
-                            <input id="title" name="title" type="text" onChange={this.handleChange} className="update-div-input" defaultValue={this.state.title}></input>
+                            <input id="title" name="title" type="text" onChange={this.handleChange} className="update-div-input" value={this.state.title}></input>
                         </div>
                             <p>By {authedUser.firstName} {authedUser.lastName}</p>
-                             <textarea className="text-area-left" id="description" name="description"  onChange={this.handleChange} defaultValue={this.state.description}></textarea>
+                             <textarea className="text-area-left" id="description" name="description"  onChange={this.handleChange} value={this.state.description}></textarea>
                     </div>
                     <div className="update-div-right">
                         <ul className="list-style-right">
