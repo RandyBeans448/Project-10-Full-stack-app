@@ -120,6 +120,7 @@ export class CreateCourse extends Component {
 
         const { errorTitle } = this.state; 
         const { errorDesc } = this.state;
+        
 
         return (
         <div  id="tsparticles" className="tsparticles">
