@@ -18,6 +18,7 @@ export class UpdateCourse extends Component {
             estimatedTime: '',
             materialsNeeded: '',
             id: '', 
+            errors: [],
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,6 +56,7 @@ export class UpdateCourse extends Component {
         context.data.getCoursesById(parsedId).then((response => {
 
             if(response) {
+                console.log('True');
                 this.setState({
                     title: response.course.title,
                     description: response.course.description,
@@ -116,11 +118,15 @@ export class UpdateCourse extends Component {
                 if(response) {
                     console.log(response);
                     this.props.history.push('/');
-                } else {
+                } else if (this.state.title === '' || this.state.description ){
                     throw new Error();
                 }
             })).catch(errors => {
                 console.log('Course was not updated', errors);
+                this.setState({
+                    errors: errors
+                });
+                console.log(this.state.errors);
             })
         }
       };
@@ -130,12 +136,18 @@ export class UpdateCourse extends Component {
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
 
+        const { errors } = this.state;
+
+        console.log(errors);
+
         let titleValidation;
         let descriptionValidation;
 
         /*
          If the the values of title and descriptions are empty Validation errors will be rendered 
-         to let the user know to fill in each field.
+         to let the user know to fill in each field. While this is a less elegant way of setting the 
+         validations when compared to the method in createCourse. However this method informs the user 
+         before the post a post can be with invalid inputs.
         */
 
         if (this.state.title === '') {
