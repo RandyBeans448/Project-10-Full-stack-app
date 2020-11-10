@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import Data from '../Data';
-import ParticlesContainer from './Particles';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import Data from "../Data";
+import ParticlesContainer from "./Particles";
 
 export class CreateCourse extends Component {
 
@@ -10,14 +10,15 @@ export class CreateCourse extends Component {
         this.data = new Data();
         this.state = {
             authenticatedUser: this.state,
-            emailAddress: '',
-            password: '',
-            userId: '',
-            title: '',
-            description: '',
-            estimatedTime: '',
-            materialsNeeded: '',
-            errors: [],
+            emailAddress: "",
+            password: "",
+            userId: "",
+            title: "",
+            description: "",
+            estimatedTime: "",
+            materialsNeeded: "",
+            errorTitle: [],
+            errorDesc: []
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -95,48 +96,43 @@ export class CreateCourse extends Component {
         
         context.data.createCourse(newCourse, emailAddress, password).then((response => {
             if (response && newCourse.title !== null && newCourse.description !== null) {
-                this.props.history.push('/');
-            } else {
-                throw new Error();
+                this.props.history.push("/");
+            } 
+            
+            if (this.state.title === "") {
+                this.setState({
+                    errorTitle: "* Please provide a title"
+                })
+            } 
+            
+            if (this.state.description === "" ) {
+                this.setState({
+                    errorDesc: "* Please provide a description"
+                })
             }
         })).catch(errors => {
-            console.log('Course was not created', errors);
+            console.log("Course was not created", errors);
             this.setState({ errors });
         })
       };
       
     render () {
 
-        /*
+        const { errorTitle } = this.state; 
+        const { errorDesc } = this.state;
 
-        If the the values of title and descriptions are empty Validation errors will be rendered 
-        to let the user know to fill in each field.
-
-        */
-
-        let titleValidation;
-        let descriptionValidation;
-
-        if (this.state.title === '') {
-            titleValidation = <p className="create-div-validations"> * Please give a value for the title </p>
-        }
-
-        if (this.state.description === '') {
-            descriptionValidation = <p className="create-div-validations"> * Please give a value for the description </p>
-        }
-        
         return (
         <div  id="tsparticles" className="tsparticles">
             <h1 className="create-h1"> Create course </h1>
-            {titleValidation}
-            {descriptionValidation}
+             <p className="create-div-validations">{errorTitle}</p>
+             <p className="create-div-validations">{errorDesc}</p>
                 <form onSubmit={this.handleSubmit}> 
                     <div className="create-div">
                         <div className="create-div-left">
                             <h4>Title</h4>
                             <input id="title" name="title" type="text" placeholder="Course title" defaultValue="" className="create-div-input"  onChange={this.handleChange}></input>
                             <h4>Course description</h4>
-                            <textarea id="description" className="text-area-left" name="description" placeholder="Course description" onChange={this.handleChange}></textarea>
+                            <textarea id="description" className="text-area-left" name="description" defaultValue="" placeholder="Course description" onChange={this.handleChange}></textarea>
                         </div>
                         <div className="create-div-right">
                             <ul>
