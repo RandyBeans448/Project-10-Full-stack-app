@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import Data from '../Data';
-import ParticlesContainer from './Particles';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import Data from "../Data";
+import ParticlesContainer from "./Particles";
 
 export class UpdateCourse extends Component {
     constructor(props) {
@@ -10,14 +10,14 @@ export class UpdateCourse extends Component {
 
         this.state = {
             authenticatedUser: this.state,
-            emailAddress: '',
-            password: '',
-            userId: '',
-            title: '',
-            description: '',
-            estimatedTime: '',
-            materialsNeeded: '',
-            id: '', 
+            emailAddress: "",
+            password: "",
+            userId: "",
+            title: "",
+            description: "",
+            estimatedTime: "",
+            materialsNeeded: "",
+            id: "", 
             errors: [],
           }
 
@@ -56,7 +56,7 @@ export class UpdateCourse extends Component {
         context.data.getCoursesById(parsedId).then((response => {
 
             if(response) {
-                console.log('True');
+                console.log("True");
                 this.setState({
                     title: response.course.title,
                     description: response.course.description,
@@ -66,7 +66,7 @@ export class UpdateCourse extends Component {
                 })
             }
         })).catch(error => {
-            console.log('Course does not exists', error);
+            console.log("Course does not exists", error);
         })
     }
 
@@ -113,16 +113,17 @@ export class UpdateCourse extends Component {
      // The PUT request is made if title and description are not empty
      // PUT request requires the id of the course as well as the user email and password to make a change.
 
-        if(updatedCourse.title !== '' || updatedCourse.description !== '') {
+        if(updatedCourse.title !== "" || updatedCourse.description !== "") {
             context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
-                if(response) {
-                    console.log(response);
-                    this.props.history.push('/');
-                } else if (this.state.title === '' || this.state.description ){
+                if(updatedCourse.title === "" || updatedCourse.description === "" ) {
                     throw new Error();
+                    
+                } else if (response){
+                    console.log(response);
+                    this.props.history.push("/");
                 }
             })).catch(errors => {
-                console.log('Course was not updated', errors);
+                console.log("Course was not updated", errors);
                 this.setState({
                     errors: errors
                 });
@@ -135,6 +136,9 @@ export class UpdateCourse extends Component {
 
         const { context } = this.props; 
         const authedUser = context.authenticatedUser;
+
+        const paramsId = this.props.match.params.id;
+        const parsedId = parseInt(paramsId);
 
         const { errors } = this.state;
 
@@ -150,11 +154,11 @@ export class UpdateCourse extends Component {
          before the post a post can be with invalid inputs.
         */
 
-        if (this.state.title === '') {
+        if (this.state.title === "") {
             titleValidation = <p className="create-div-validations"> * Please give a value for the title </p>
         }
 
-        if (this.state.description === '') {
+        if (this.state.description === "") {
             descriptionValidation = <p className="create-div-validations"> * Please give a value for the description </p>
         }
         
@@ -192,7 +196,7 @@ export class UpdateCourse extends Component {
                     </div>
                     <div className="buttons">
                         <button className="update-button"type="submit">Update Course</button>
-                        <NavLink className="update-button" to="/" >Cancel</NavLink>
+                        <NavLink className="update-button" to={`/courses/${parsedId}`} >Cancel</NavLink>
                     </div>
                     <div id="tsparticles" className="tsparticles"/>
                 </form>
