@@ -17,8 +17,7 @@ export class CreateCourse extends Component {
             description: "",
             estimatedTime: "",
             materialsNeeded: "",
-            errorTitle: [],
-            errorDesc: []
+            errors: []
           }
 
           this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,7 +65,7 @@ export class CreateCourse extends Component {
     handleSubmit = (event) => {
 
         const { context } = this.props;
-
+        const authenticatedUser = context.authenticatedUser;
     // Takes the state of each value needed to authenticate a POST request from the Rest Api.    
 
         const {
@@ -88,45 +87,34 @@ export class CreateCourse extends Component {
             };
 
         const { emailAddress, password } = this.state;
-    
+
      // The POST request is made if title and description are not empty
      // POST request requires user email and password to make the request.    
 
         event.preventDefault();
-        
-        context.data.createCourse(newCourse, emailAddress, password).then((response => {
-            if (response && newCourse.title !== null && newCourse.description !== null) {
+
+        context.data.createCourse(newCourse, emailAddress, password)
+        .then( errors => {
+            if (errors.length) {
+              this.setState({ errors });
+              console.log(errors);
+              } else {
                 this.props.history.push("/");
-            } 
-            
-            if (this.state.title === "") {
-                this.setState({
-                    errorTitle: "* Please provide a title"
-                })
-            } 
-            
-            if (this.state.description === "" ) {
-                this.setState({
-                    errorDesc: "* Please provide a description"
-                })
-            }
-        })).catch(errors => {
-            console.log("Course was not created", errors);
-            this.setState({ errors });
-        })
+              }
+            })
       };
       
     render () {
 
-        const { errorTitle } = this.state; 
-        const { errorDesc } = this.state;
+        let errorList = this.state.errors.map((error, index) => {
+            return <p className="create-div-validations" key={index}>{error}</p>
+            })
         
 
         return (
         <div  id="tsparticles" className="tsparticles">
             <h1 className="create-h1"> Create course </h1>
-             <p className="create-div-validations">{errorTitle}</p>
-             <p className="create-div-validations">{errorDesc}</p>
+            {errorList}
                 <form onSubmit={this.handleSubmit}> 
                     <div className="create-div">
                         <div className="create-div-left">
