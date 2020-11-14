@@ -106,10 +106,14 @@ export class CreateCourse extends Component {
       
     render () {
 
-        let errorList = this.state.errors.map((error, index) => {
-            return <p className="create-div-validations" key={index}>{error}</p>
-            })
-        
+        let errorList;
+
+        if (this.state.errors.length) {
+            errorList = this.state.errors.map((error, index) => {
+                return <p className="create-div-validations" key={index}>{error}</p>
+                })
+        }
+
 
         return (
         <div  id="tsparticles" className="tsparticles">
