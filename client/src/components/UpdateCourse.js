@@ -108,20 +108,27 @@ export class UpdateCourse extends Component {
      const { emailAddress, password } = this.state;
      const { id } = this.state;
 
-        event.preventDefault();
+     const paramsId = this.props.match.params.id;
+     const parsedId = parseInt(paramsId);
+
+
+    event.preventDefault();
      
      // The PUT request is made if title and description are not empty
      // PUT request requires the id of the course as well as the user email and password to make a change.
 
      context.data.updateCourse(id, updatedCourse, emailAddress, password)
      .then( errors => {
-        if (errors) {
+        if (errors.length) {
           this.setState({ errors });
           console.log(errors);
-          } else {
-            this.props.history.push("/");
+          } else if (this.state.description !== "" || this.state.title !== "") {
+            this.props.history.push(`/courses/${parsedId}`);
           }
-        })
+        }).catch(error => {
+            console.log(error)
+        }) 
+   
       };
 
     render () {
@@ -132,15 +139,20 @@ export class UpdateCourse extends Component {
         const paramsId = this.props.match.params.id;
         const parsedId = parseInt(paramsId);
 
-        let errorList = this.state.errors.map((error, index) => {
-        return <p className="create-div-validations" key={index}>{error}</p>
-        })
+        let errorList;
+
+        if (this.state.errors.length) {
+            errorList = this.state.errors.map((error, index) => {
+                return <p className="create-div-validations" key={index}>{error}</p>
+                })
+        }
 
         return (
             <div >
                 <h1 className="update-h1"> Update Course </h1>
-                {errorList}
+                
                 <form onSubmit={this.handleSubmit}>
+                {errorList}
                     <div className="update-div">
                         <div className="update-div-left">
                             <h3>Course title</h3>
