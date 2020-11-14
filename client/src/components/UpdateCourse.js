@@ -113,23 +113,15 @@ export class UpdateCourse extends Component {
      // The PUT request is made if title and description are not empty
      // PUT request requires the id of the course as well as the user email and password to make a change.
 
-        if(updatedCourse.title !== "" || updatedCourse.description !== "") {
-            context.data.updateCourse(id, updatedCourse, emailAddress, password).then((response => {
-                if(updatedCourse.title === "" || updatedCourse.description === "" ) {
-                    throw new Error();
-                    
-                } else if (response){
-                    console.log(response);
-                    this.props.history.push("/");
-                }
-            })).catch(errors => {
-                console.log("Course was not updated", errors);
-                this.setState({
-                    errors: errors
-                });
-                console.log(this.state.errors);
-            })
-        }
+     context.data.updateCourse(id, updatedCourse, emailAddress, password)
+     .then( errors => {
+        if (errors) {
+          this.setState({ errors });
+          console.log(errors);
+          } else {
+            this.props.history.push("/");
+          }
+        })
       };
 
     render () {
@@ -140,33 +132,14 @@ export class UpdateCourse extends Component {
         const paramsId = this.props.match.params.id;
         const parsedId = parseInt(paramsId);
 
-        const { errors } = this.state;
+        let errorList = this.state.errors.map((error, index) => {
+        return <p className="create-div-validations" key={index}>{error}</p>
+        })
 
-        console.log(errors);
-
-        let titleValidation;
-        let descriptionValidation;
-
-        /*
-         If the the values of title and descriptions are empty Validation errors will be rendered 
-         to let the user know to fill in each field. While this is a less elegant way of setting the 
-         validations when compared to the method in createCourse. However this method informs the user 
-         before the post a post can be with invalid inputs.
-        */
-
-        if (this.state.title === "") {
-            titleValidation = <p className="create-div-validations"> * Please give a value for the title </p>
-        }
-
-        if (this.state.description === "") {
-            descriptionValidation = <p className="create-div-validations"> * Please give a value for the description </p>
-        }
-        
         return (
             <div >
                 <h1 className="update-h1"> Update Course </h1>
-                {titleValidation}
-                {descriptionValidation}
+                {errorList}
                 <form onSubmit={this.handleSubmit}>
                     <div className="update-div">
                         <div className="update-div-left">
