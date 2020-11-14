@@ -129,7 +129,7 @@ check('description')
     const errorMessages = errors.array().map(error => error.msg);
 
     // Return the validation errors to the client.
-    return res.status(401).json({ errors: errorMessages });
+    return res.status(400).json({ errors: errorMessages });
   }
 
   // Get the course from the request body.
@@ -157,7 +157,7 @@ check('description')
    const errors = validationResult(req);
    if (!errors.isEmpty()) {
      const errorMessages = errors.array().map(error => error.msg);
-     return res.status(401).json({ errors: errorMessages });
+     return res.status(400).json({ errors: errorMessages });
    }
 
   let user = req.currentUser;
