@@ -1,6 +1,7 @@
 {
   "name": "techdegree-fullstackjs-rest-api",
   "version": "1.0.0",
+  "engines": {"node": "v12.16.3"},
   "description": "",
   "main": "app.js",
   "scripts": {
